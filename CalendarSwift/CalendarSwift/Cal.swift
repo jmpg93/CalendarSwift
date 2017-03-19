@@ -139,7 +139,6 @@ extension Cal.Range {
         }
     }
     
-    //TODO: Set up infinite date
     var begin: Date {
         switch self {
         case .infinite:
@@ -148,8 +147,7 @@ extension Cal.Range {
             return begin
         }
     }
-    
-    //TODO: Set up infinite date
+
     var end: Date {
         switch self {
         case .infinite:

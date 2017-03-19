@@ -15,22 +15,21 @@ public class CalendarViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        daysView?.delegate = self
-        daysView?.dataSource = self
+        daysView.dataSource = self
     }
 }
 
-extension CalendarViewController: UICollectionViewDataSource {
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension CalendarViewController: DaysViewDataSource {
+    public func numberOfMonths() -> Int {
         return calendar.months.count
     }
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return calendar.months[section].numberOfDaysInMonth
+    public func numberOfDays(in month: Int) -> Int {
+        return calendar.months[month].numberOfDaysInMonth
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCell", for: indexPath) as! DayCell
+    public func daysView(_ daysView: DaysView, cellForItemAt indexPath: IndexPath) -> DayCell {
+        let cell = daysView.dequeueReusableCell(withReuseIdentifier: "DayCell", for: indexPath)
         
         switch indexPath.section {
         case 0:
@@ -40,17 +39,10 @@ extension CalendarViewController: UICollectionViewDataSource {
         case 2:
             cell.backgroundColor = .green
         default:
-           cell.backgroundColor = .purple
+            cell.backgroundColor = .purple
         }
         
-        cell.update(value: String(indexPath.row))
-        
+        cell.update(value: "\(indexPath.row + 1)")
         return cell
     }
-    
 }
-
-extension CalendarViewController: UICollectionViewDelegate {
-    
-}
-
