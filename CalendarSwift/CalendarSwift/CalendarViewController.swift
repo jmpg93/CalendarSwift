@@ -16,6 +16,20 @@ public class CalendarViewController: UIViewController {
         super.viewDidLoad()
         
         daysView.dataSource = self
+        weekDaysView.dataSource = self
+    }
+}
+
+extension CalendarViewController: WeekDaysViewDataSource {
+    public func numberOfWeekDays() -> Int {
+        return calendar.calendar.weekdaySymbols.count
+    }
+    
+    public func weekDaysView(_ weekDaysView: WeekDaysView, cellForItemAt indexPath: IndexPath) -> WeekDayCell {
+        let cell = weekDaysView.dequeueReusableCell(withReuseIdentifier: "WeekDayCell", for: indexPath)
+        let day = calendar.calendar.weekdaySymbols[indexPath.row]
+        cell.update(value: day)
+        return cell
     }
 }
 

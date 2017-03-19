@@ -12,6 +12,9 @@
 		6C5F44681E7F12F3000FEA05 /* DaysViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F44671E7F12F3000FEA05 /* DaysViewDelegate.swift */; };
 		6C5F446A1E7F1312000FEA05 /* DaysViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F44691E7F1312000FEA05 /* DaysViewDataSource.swift */; };
 		6C5F446C1E7F15D5000FEA05 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F446B1E7F15D5000FEA05 /* UIViewExtensions.swift */; };
+		6C5F44711E7F1DC0000FEA05 /* WeekDaysViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F446F1E7F1DC0000FEA05 /* WeekDaysViewDataSource.swift */; };
+		6C5F44721E7F1DC0000FEA05 /* WeekDaysViewDelegate .swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F44701E7F1DC0000FEA05 /* WeekDaysViewDelegate .swift */; };
+		6C5F44771E7F1E55000FEA05 /* WeekDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F44761E7F1E55000FEA05 /* WeekDayCell.swift */; };
 		6C6934351E7EFF3200CB58E4 /* DaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6934341E7EFF3200CB58E4 /* DaysView.swift */; };
 		6C6934381E7EFF7C00CB58E4 /* WeekDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6934371E7EFF7C00CB58E4 /* WeekDaysView.swift */; };
 		6C69343A1E7EFF9200CB58E4 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6934391E7EFF9200CB58E4 /* CalendarViewController.swift */; };
@@ -44,6 +47,9 @@
 		6C5F44671E7F12F3000FEA05 /* DaysViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaysViewDelegate.swift; sourceTree = "<group>"; };
 		6C5F44691E7F1312000FEA05 /* DaysViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaysViewDataSource.swift; sourceTree = "<group>"; };
 		6C5F446B1E7F15D5000FEA05 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		6C5F446F1E7F1DC0000FEA05 /* WeekDaysViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDaysViewDataSource.swift; sourceTree = "<group>"; };
+		6C5F44701E7F1DC0000FEA05 /* WeekDaysViewDelegate .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WeekDaysViewDelegate .swift"; sourceTree = "<group>"; };
+		6C5F44761E7F1E55000FEA05 /* WeekDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDayCell.swift; sourceTree = "<group>"; };
 		6C6934341E7EFF3200CB58E4 /* DaysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaysView.swift; sourceTree = "<group>"; };
 		6C6934371E7EFF7C00CB58E4 /* WeekDaysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDaysView.swift; sourceTree = "<group>"; };
 		6C6934391E7EFF9200CB58E4 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarViewController.swift; path = CalendarSwift/CalendarViewController.swift; sourceTree = "<group>"; };
@@ -94,10 +100,9 @@
 		6C5F44601E7F0F32000FEA05 /* DaysView */ = {
 			isa = PBXGroup;
 			children = (
+				6C5F44731E7F1E37000FEA05 /* Protocols */,
 				6C5F445F1E7F07F8000FEA05 /* DayCell */,
 				6C6934341E7EFF3200CB58E4 /* DaysView.swift */,
-				6C5F44691E7F1312000FEA05 /* DaysViewDataSource.swift */,
-				6C5F44671E7F12F3000FEA05 /* DaysViewDelegate.swift */,
 			);
 			name = DaysView;
 			sourceTree = "<group>";
@@ -105,6 +110,8 @@
 		6C5F44611E7F0F39000FEA05 /* WeekDaysView */ = {
 			isa = PBXGroup;
 			children = (
+				6C5F44751E7F1E44000FEA05 /* WeekDayCell */,
+				6C5F44741E7F1E3D000FEA05 /* Protocols */,
 				6C6934371E7EFF7C00CB58E4 /* WeekDaysView.swift */,
 			);
 			name = WeekDaysView;
@@ -124,6 +131,32 @@
 				6C5F446B1E7F15D5000FEA05 /* UIViewExtensions.swift */,
 			);
 			name = Extension;
+			sourceTree = "<group>";
+		};
+		6C5F44731E7F1E37000FEA05 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6C5F44691E7F1312000FEA05 /* DaysViewDataSource.swift */,
+				6C5F44671E7F12F3000FEA05 /* DaysViewDelegate.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		6C5F44741E7F1E3D000FEA05 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6C5F446F1E7F1DC0000FEA05 /* WeekDaysViewDataSource.swift */,
+				6C5F44701E7F1DC0000FEA05 /* WeekDaysViewDelegate .swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		6C5F44751E7F1E44000FEA05 /* WeekDayCell */ = {
+			isa = PBXGroup;
+			children = (
+				6C5F44761E7F1E55000FEA05 /* WeekDayCell.swift */,
+			);
+			name = WeekDayCell;
 			sourceTree = "<group>";
 		};
 		6C6934361E7EFF4A00CB58E4 /* Views */ = {
@@ -318,6 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C5F44711E7F1DC0000FEA05 /* WeekDaysViewDataSource.swift in Sources */,
 				6C5F446A1E7F1312000FEA05 /* DaysViewDataSource.swift in Sources */,
 				6C6934351E7EFF3200CB58E4 /* DaysView.swift in Sources */,
 				6C5F44641E7F0F9C000FEA05 /* DayCell.swift in Sources */,
@@ -325,9 +359,11 @@
 				6CF15A681E7EEE0C00C520E1 /* Cal.swift in Sources */,
 				6CF15A6F1E7EEFB700C520E1 /* Day.swift in Sources */,
 				6CF15A6D1E7EEF2D00C520E1 /* Week.swift in Sources */,
+				6C5F44771E7F1E55000FEA05 /* WeekDayCell.swift in Sources */,
 				6C69343A1E7EFF9200CB58E4 /* CalendarViewController.swift in Sources */,
 				6C5F445C1E7F0328000FEA05 /* LabeledCell.swift in Sources */,
 				6C5F44681E7F12F3000FEA05 /* DaysViewDelegate.swift in Sources */,
+				6C5F44721E7F1DC0000FEA05 /* WeekDaysViewDelegate .swift in Sources */,
 				6C5F446C1E7F15D5000FEA05 /* UIViewExtensions.swift in Sources */,
 				6C6934381E7EFF7C00CB58E4 /* WeekDaysView.swift in Sources */,
 			);
