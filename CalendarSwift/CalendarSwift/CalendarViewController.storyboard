@@ -12,7 +12,7 @@
         <!--Calendar View Controller-->
         <scene sceneID="o8f-99-8SU">
             <objects>
-                <viewController id="Buv-uW-Chg" customClass="CalendarViewController" customModule="CalendarSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarViewController" id="Buv-uW-Chg" customClass="CalendarViewController" customModule="CalendarSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WL0-nT-dfC"/>
                         <viewControllerLayoutGuide type="bottom" id="02f-cw-BZi"/>
@@ -31,7 +31,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DayCell" id="Ls5-gF-LBc">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DayCell" id="Ls5-gF-LBc" customClass="DayCell" customModule="CalendarSwift" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -60,6 +60,10 @@
                             <constraint firstAttribute="trailing" secondItem="mT0-DF-NNS" secondAttribute="trailing" id="wb7-z4-NqR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="daysView" destination="N4P-ba-Wwy" id="aVb-kr-eNs"/>
+                        <outlet property="weekDaysView" destination="mT0-DF-NNS" id="rn2-6O-hfk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VP0-Ux-Xa5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

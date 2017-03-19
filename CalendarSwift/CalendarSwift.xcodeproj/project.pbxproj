@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C5F445C1E7F0328000FEA05 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F445B1E7F0328000FEA05 /* DayCell.swift */; };
 		6C6934351E7EFF3200CB58E4 /* DaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6934341E7EFF3200CB58E4 /* DaysView.swift */; };
 		6C6934381E7EFF7C00CB58E4 /* WeekDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6934371E7EFF7C00CB58E4 /* WeekDaysView.swift */; };
 		6C69343A1E7EFF9200CB58E4 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6934391E7EFF9200CB58E4 /* CalendarViewController.swift */; };
@@ -17,7 +18,6 @@
 		6CF15A6D1E7EEF2D00C520E1 /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF15A6C1E7EEF2D00C520E1 /* Week.swift */; };
 		6CF15A6F1E7EEFB700C520E1 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF15A6E1E7EEFB700C520E1 /* Day.swift */; };
 		6CF15A771E7EF02200C520E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF15A761E7EF02200C520E1 /* AppDelegate.swift */; };
-		6CF15A791E7EF02200C520E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF15A781E7EF02200C520E1 /* ViewController.swift */; };
 		6CF15A7C1E7EF02200C520E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CF15A7A1E7EF02200C520E1 /* Main.storyboard */; };
 		6CF15A7E1E7EF02200C520E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CF15A7D1E7EF02200C520E1 /* Assets.xcassets */; };
 		6CF15A811E7EF02200C520E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CF15A7F1E7EF02200C520E1 /* LaunchScreen.storyboard */; };
@@ -35,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C5F445B1E7F0328000FEA05 /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		6C6934341E7EFF3200CB58E4 /* DaysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaysView.swift; sourceTree = "<group>"; };
 		6C6934371E7EFF7C00CB58E4 /* WeekDaysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDaysView.swift; sourceTree = "<group>"; };
 		6C6934391E7EFF9200CB58E4 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarViewController.swift; path = CalendarSwift/CalendarViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +49,6 @@
 		6CF15A6E1E7EEFB700C520E1 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		6CF15A741E7EF02200C520E1 /* Calendar iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calendar iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF15A761E7EF02200C520E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6CF15A781E7EF02200C520E1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6CF15A7B1E7EF02200C520E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6CF15A7D1E7EF02200C520E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CF15A801E7EF02200C520E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -75,9 +75,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C5F445F1E7F07F8000FEA05 /* DayCell */ = {
+			isa = PBXGroup;
+			children = (
+				6C5F445B1E7F0328000FEA05 /* DayCell.swift */,
+			);
+			name = DayCell;
+			sourceTree = "<group>";
+		};
 		6C6934361E7EFF4A00CB58E4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6C5F445F1E7F07F8000FEA05 /* DayCell */,
 				6C6934341E7EFF3200CB58E4 /* DaysView.swift */,
 				6C6934371E7EFF7C00CB58E4 /* WeekDaysView.swift */,
 			);
@@ -139,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				6CF15A761E7EF02200C520E1 /* AppDelegate.swift */,
-				6CF15A781E7EF02200C520E1 /* ViewController.swift */,
 				6CF15A7A1E7EF02200C520E1 /* Main.storyboard */,
 				6CF15A7D1E7EF02200C520E1 /* Assets.xcassets */,
 				6CF15A7F1E7EF02200C520E1 /* LaunchScreen.storyboard */,
@@ -272,6 +280,7 @@
 				6CF15A6F1E7EEFB700C520E1 /* Day.swift in Sources */,
 				6CF15A6D1E7EEF2D00C520E1 /* Week.swift in Sources */,
 				6C69343A1E7EFF9200CB58E4 /* CalendarViewController.swift in Sources */,
+				6C5F445C1E7F0328000FEA05 /* DayCell.swift in Sources */,
 				6C6934381E7EFF7C00CB58E4 /* WeekDaysView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,7 +289,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CF15A791E7EF02200C520E1 /* ViewController.swift in Sources */,
 				6CF15A771E7EF02200C520E1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

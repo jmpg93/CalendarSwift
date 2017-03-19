@@ -8,6 +8,7 @@ public struct Cal {
     
     public let range: Range
     public let calendar: Calendar
+    public private(set) var months: [Month] = []
     
     public let maxNumberOfDaysInWeek = 7
     public let numberOfRowsPerSectionThatUserWants = 4
@@ -15,10 +16,12 @@ public struct Cal {
     public init(calendar: Calendar = .current, range: Range = .infinite) {
         self.calendar = calendar
         self.range = range.withStartingDays(on: calendar)
+        
+        reload()
     }
     
-    public var months: [Month] {
-        return months(in: range)
+    mutating func reload() {
+        months = months(in: range)
     }
     
     // Private funcs 
@@ -122,6 +125,10 @@ public struct Cal {
 
 
 extension Cal.Range {
+    private var monthTimeInterval: TimeInterval {
+        return 31 * 60 * 60 * 24
+    }
+    
     func withStartingDays(on calendar: Calendar) -> Cal.Range {
         switch self {
         case .infinite:
@@ -136,7 +143,7 @@ extension Cal.Range {
     var begin: Date {
         switch self {
         case .infinite:
-            return Date()
+            return Date().addingTimeInterval(-monthTimeInterval)
         case .limited(let begin, _):
             return begin
         }
@@ -146,7 +153,7 @@ extension Cal.Range {
     var end: Date {
         switch self {
         case .infinite:
-            return Date()
+            return Date().addingTimeInterval(monthTimeInterval)
         case .limited(_, let end):
             return end
         }
