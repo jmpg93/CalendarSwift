@@ -37,7 +37,7 @@ public class DaysView: UIView {
 
 extension DaysView: CollectionViewLayoutDelegate {
     func numberOfWeekDays() -> Int {
-        return dataSource?.numberOfWeekDays() ?? 0
+        return dataSource!.numberOfWeekDays()
     }
 }
 
@@ -47,13 +47,12 @@ extension DaysView: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource?.numberOfDays(in: section) ?? 0
+        return dataSource!.numberOfDays(in: section)
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return dataSource?.daysView(self, cellForItemAt: indexPath) ?? UICollectionViewCell()
+        return dataSource!.daysView(self, cellForItemAt: indexPath)
     }
-    
 }
 
 extension DaysView: UICollectionViewDelegate {

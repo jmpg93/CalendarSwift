@@ -40,24 +40,24 @@ extension CalendarViewController: DaysViewDataSource {
     }
     
     public func numberOfDays(in month: Int) -> Int {
-        return calendar.months[month].numberOfDaysInMonth
+        return calendar.months[month].numberOfDaysInMonthGrid
     }
     
     public func daysView(_ daysView: DaysView, cellForItemAt indexPath: IndexPath) -> DayCell {
         let cell = daysView.dequeueReusableCell(for: indexPath)
+        let month = calendar.months[indexPath.section]
         
-        switch indexPath.section {
-        case 0:
-            cell.backgroundColor = .yellow
-        case 1:
-            cell.backgroundColor = .blue
-        case 2:
-            cell.backgroundColor = .green
+        let value = indexPath.row + 1 - month.inDates
+        
+        switch value {
+        case Int.min...0:
+            cell.update(value: "")
+        case 1...month.numberOfDaysInMonth:
+            cell.update(value: "\(value)")
         default:
-            cell.backgroundColor = .purple
+            cell.update(value: "")
         }
         
-        cell.update(value: "\(indexPath.row + 1)")
         return cell
     }
 }
