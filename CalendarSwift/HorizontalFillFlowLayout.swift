@@ -1,6 +1,6 @@
 import UIKit
 
-class CustomCollectionViewLayout: UICollectionViewLayout {
+class HorizontalFillFlowLayout: UICollectionViewLayout {
     private weak var delegate: CollectionViewLayoutDelegate!
     
     var cellAttrsDictionary = Dictionary<IndexPath, UICollectionViewLayoutAttributes>()

@@ -21,7 +21,7 @@ public class DaysView: UIView {
     }
     
     private func commonInit() {
-        let layout = CustomCollectionViewLayout(delegate: self)
+        let layout = HorizontalFillFlowLayout(delegate: self)
         collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
         collectionView.register(DayCell.self, forCellWithReuseIdentifier: DayCell.reuseIdentifier)
         collectionView.pinTo(view: self)

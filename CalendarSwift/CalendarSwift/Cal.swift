@@ -12,6 +12,7 @@ public struct Cal {
     
     public let numberOfDaysInWeek = 7
     public let numberOfRowsPerSectionThatUserWants = 4
+    public var firstWeekDay: Day.WeekDay = .monday
     
     public init(calendar: Calendar = .current, range: Range = .infinite) {
         self.calendar = calendar
@@ -39,7 +40,8 @@ public struct Cal {
         var totalDays = 0
         
         for monthIndex in 0 ..< numberOfMonths {
-            print("Searching for days in month \(monthIndex)")
+            print("*****MONTH \(monthIndex)*****")
+
             guard let currentMonthDate = calendar.date(byAdding: .month, value: monthIndex, to: range.begin) else {
                 print("Month date could not be created for date \(range.begin) and month index \(monthIndex)")
                 break
@@ -48,18 +50,22 @@ public struct Cal {
             var numberOfDaysInMonthVariable = calendar.range(of: .day, in: .month, for: currentMonthDate)!.count
             let numberOfDaysInMonthFixed = numberOfDaysInMonthVariable
             var numberOfRowsToGenerateForCurrentMonth = 0
-            let numberOfPreDatesForThisMonth = 0
+            var numberOfPreDatesForThisMonth = 0
             
             print("Month \(monthIndex) has \(numberOfDaysInMonthVariable) days")
             
+            //Predates
+            numberOfPreDatesForThisMonth = numberOfPreDatesForMonth(currentMonthDate, firstDayOfWeek: firstWeekDay, calendar: calendar)
+            numberOfDaysInMonthVariable += numberOfPreDatesForThisMonth
+            
+            //Postdates
             let actualNumberOfRowsForThisMonth = Int(ceil(Float(numberOfDaysInMonthVariable) / Float(numberOfDaysInWeek)))
             numberOfRowsToGenerateForCurrentMonth = actualNumberOfRowsForThisMonth
-            
             print("Month \(monthIndex) has \(actualNumberOfRowsForThisMonth) rows")
             
-            let numberOfPostDatesForThisMonth = numberOfDaysInWeek * numberOfRowsToGenerateForCurrentMonth - (numberOfDaysInMonthFixed + numberOfPreDatesForThisMonth)
+            let numberOfPostDatesForThisMonth =
+                numberOfDaysInWeek * numberOfRowsToGenerateForCurrentMonth - (numberOfDaysInMonthFixed + numberOfPreDatesForThisMonth)
             numberOfDaysInMonthVariable += numberOfPostDatesForThisMonth
-            
             
             print("Month \(monthIndex) will generate \(numberOfRowsToGenerateForCurrentMonth) rows")
             print("Month \(monthIndex) has \(numberOfDaysInMonthVariable) days now")
@@ -91,7 +97,7 @@ public struct Cal {
                 
             }
             
-            print("--")
+            print("--RESUME--")
             print("Month \(monthIndex) has \(startIndexForMonth) startIndexForMonth")
             print("Month \(monthIndex) has \(startCellIndexForMonth) startCellIndexForMonth")
             print("Month \(monthIndex) has \(sectionsForTheMonth) sectionsForTheMonth")
@@ -100,7 +106,7 @@ public struct Cal {
             print("Month \(monthIndex) has \(sectionIndexMaps) sectionIndexMaps")
             print("Month \(monthIndex) has \(numberOfRowsToGenerateForCurrentMonth) numberOfRowsToGenerateForCurrentMonth")
             print("Month \(monthIndex) has \(numberOfDaysInMonthFixed) numberOfDaysInMonthFixed")
-            print("--")
+            print("----------")
             
             monthArray.append(Month(
                 startDayIndex: startIndexForMonth,
@@ -116,10 +122,30 @@ public struct Cal {
             startIndexForMonth += numberOfDaysInMonthFixed
             startCellIndexForMonth += numberOfDaysInMonthFixed + numberOfPreDatesForThisMonth + numberOfPostDatesForThisMonth
             
-            print("")
+            print("*****************")
         }
         
         return monthArray
+    }
+    
+    private func numberOfPreDatesForMonth(_ date: Date, firstDayOfWeek: Day.WeekDay, calendar: Calendar) -> Int {
+        let firstDayCalValue: Int
+        switch firstDayOfWeek {
+        case .monday: firstDayCalValue = 6
+        case .tuesday: firstDayCalValue = 5
+        case .wednesday: firstDayCalValue = 4
+        case .thursday: firstDayCalValue = 10
+        case .friday: firstDayCalValue = 9
+        case .saturday: firstDayCalValue = 8
+        default: firstDayCalValue = 7
+        }
+        
+        var firstWeekdayOfMonthIndex = calendar.component(.weekday, from: date)
+        firstWeekdayOfMonthIndex -= 1
+        // firstWeekdayOfMonthIndex should be 0-Indexed
+        // push it modularly so that we take it back one day so that the
+        // first day is Monday instead of Sunday which is the default
+        return (firstWeekdayOfMonthIndex + firstDayCalValue) % numberOfDaysInWeek
     }
 }
 

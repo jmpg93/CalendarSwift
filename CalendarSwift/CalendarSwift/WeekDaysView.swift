@@ -87,8 +87,9 @@ public class WeekDaysView: UIView {
 }
 
 extension WeekDaysView: CollectionViewLayoutDelegate {
+    
     func numberOfWeekDays() -> Int {
-        return dataSource?.numberOfWeekDays() ?? 0
+        return dataSource!.numberOfWeekDays()
     }
 }
 

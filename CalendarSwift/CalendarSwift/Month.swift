@@ -40,7 +40,7 @@ public struct Month {
     var startSection: Int {
         return sectionIndexMaps.keys.min()!
     }
-
+    
     // Return the section in which a day is contained
     func indexPath(forDay number: Int) -> IndexPath? {
         let sectionInfo = sectionFor(day: number)

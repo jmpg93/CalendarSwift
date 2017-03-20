@@ -31,6 +31,10 @@ extension CalendarViewController: WeekDaysViewDataSource {
 }
 
 extension CalendarViewController: DaysViewDataSource {
+    public var firstWeekDay: Day.WeekDay {
+        return calendar.firstWeekDay
+    }
+    
     public func numberOfMonths() -> Int {
         return calendar.months.count
     }
