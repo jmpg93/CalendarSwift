@@ -24,7 +24,6 @@ public class CollectionViewLayout: UICollectionViewFlowLayout {
     }
     
     public override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        print(proposedContentOffset)
        return super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
     }
     
@@ -32,14 +31,20 @@ public class CollectionViewLayout: UICollectionViewFlowLayout {
         print(proposedContentOffset)
         return super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
     }
-    
+
     public override func prepare() {
         super.prepare()
         let size = collectionView!.bounds.width / CGFloat(delegate.numberOfWeekDays())
         itemSize = CGSize(width: size, height: size)
     }
     
+    var calculatedColumnCount: CGFloat = 0
+    var calculatedLineCount: CGFloat = 0
+    var layoutAttributesArray: [UICollectionViewLayoutAttributes] = []
+    var columnCount: CGFloat = 0
+    
     private func commonInit() {
+        scrollDirection = .horizontal
         minimumLineSpacing = 0.0
         minimumInteritemSpacing = 0.0
         sectionInset = .zero

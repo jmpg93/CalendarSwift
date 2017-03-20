@@ -21,7 +21,8 @@ public class DaysView: UIView {
     }
     
     private func commonInit() {
-        collectionView = UICollectionView(frame: bounds, collectionViewLayout: CollectionViewLayout(delegate: self))
+        let layout = CustomCollectionViewLayout(delegate: self)
+        collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
         collectionView.register(DayCell.self, forCellWithReuseIdentifier: DayCell.reuseIdentifier)
         collectionView.pinTo(view: self)
         collectionView.backgroundColor = .white
