@@ -5,7 +5,7 @@ public class CalendarViewController: UIViewController {
     @IBOutlet weak var weekDaysView: WeekDaysView!
     @IBOutlet weak var daysView: DaysView!
     
-    fileprivate let calendar = Cal()
+    public let calendar = Cal()
     
     public static func initFromStoryboard() -> CalendarViewController {
         let bundle = Bundle(for: CalendarViewController.self)
@@ -21,15 +21,12 @@ public class CalendarViewController: UIViewController {
 }
 
 extension CalendarViewController: WeekDaysViewDataSource {
-    public func numberOfWeekDays() -> Int {
-        return calendar.calendar.weekdaySymbols.count
+    public func weeekDay(at indexPath: IndexPath, style: WeekDayStyle) -> String {
+        return calendar.symbols(for: style)[indexPath.row]
     }
     
-    public func weekDaysView(_ weekDaysView: WeekDaysView, cellForItemAt indexPath: IndexPath) -> WeekDayCell {
-        let cell = weekDaysView.dequeueReusableCell(withReuseIdentifier: "WeekDayCell", for: indexPath)
-        let day = calendar.calendar.weekdaySymbols[indexPath.row]
-        cell.update(value: day)
-        return cell
+    public func numberOfWeekDays() -> Int {
+        return calendar.weekdaySymbols.count
     }
 }
 
@@ -43,7 +40,7 @@ extension CalendarViewController: DaysViewDataSource {
     }
     
     public func daysView(_ daysView: DaysView, cellForItemAt indexPath: IndexPath) -> DayCell {
-        let cell = daysView.dequeueReusableCell(withReuseIdentifier: "DayCell", for: indexPath)
+        let cell = daysView.dequeueReusableCell(for: indexPath)
         
         switch indexPath.section {
         case 0:

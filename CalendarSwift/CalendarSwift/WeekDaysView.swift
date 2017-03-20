@@ -17,13 +17,13 @@ public class WeekDaysView: UIView {
         commonInit()
     }
     
-    func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> WeekDayCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! WeekDayCell
+    func dequeueReusableCell(for indexPath: IndexPath) -> WeekDayCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: WeekDayCell.reuseIdentifier, for: indexPath) as! WeekDayCell
     }
     
     private func commonInit() {
         collectionView = UICollectionView(frame: bounds, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.register(DayCell.self, forCellWithReuseIdentifier: "WeekDayCell")
+        collectionView.register(WeekDayCell.self, forCellWithReuseIdentifier: WeekDayCell.reuseIdentifier)
         collectionView.pinTo(view: self)
         collectionView.backgroundColor = .white
         
@@ -34,15 +34,19 @@ public class WeekDaysView: UIView {
 
 extension WeekDaysView: UICollectionViewDataSource {
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 0
+        return 1
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource?.numberOfWeekDays() ?? 0
+        return dataSource!.numberOfWeekDays()
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return dataSource?.weekDaysView(self, cellForItemAt: indexPath) ?? UICollectionViewCell()
+        let cell = dequeueReusableCell(for: indexPath)
+        let day = dataSource!.weeekDay(at: indexPath, style: dataSource!.weekDayStyle)
+        cell.update(value: day)
+        return cell
+        
     }
     
 }

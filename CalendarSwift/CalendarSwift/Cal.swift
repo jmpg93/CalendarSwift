@@ -6,11 +6,11 @@ public struct Cal {
         case infinite
     }
     
+    fileprivate let calendar: Calendar
     public let range: Range
-    public let calendar: Calendar
     public private(set) var months: [Month] = []
     
-    public let maxNumberOfDaysInWeek = 7
+    public let numberOfDaysInWeek = 7
     public let numberOfRowsPerSectionThatUserWants = 4
     
     public init(calendar: Calendar = .current, range: Range = .infinite) {
@@ -52,12 +52,12 @@ public struct Cal {
             
             print("Month \(monthIndex) has \(numberOfDaysInMonthVariable) days")
             
-            let actualNumberOfRowsForThisMonth = Int(ceil(Float(numberOfDaysInMonthVariable) / Float(maxNumberOfDaysInWeek)))
+            let actualNumberOfRowsForThisMonth = Int(ceil(Float(numberOfDaysInMonthVariable) / Float(numberOfDaysInWeek)))
             numberOfRowsToGenerateForCurrentMonth = actualNumberOfRowsForThisMonth
             
             print("Month \(monthIndex) has \(actualNumberOfRowsForThisMonth) rows")
             
-            let numberOfPostDatesForThisMonth = maxNumberOfDaysInWeek * numberOfRowsToGenerateForCurrentMonth - (numberOfDaysInMonthFixed + numberOfPreDatesForThisMonth)
+            let numberOfPostDatesForThisMonth = numberOfDaysInWeek * numberOfRowsToGenerateForCurrentMonth - (numberOfDaysInMonthFixed + numberOfPreDatesForThisMonth)
             numberOfDaysInMonthVariable += numberOfPostDatesForThisMonth
             
             
@@ -75,7 +75,7 @@ public struct Cal {
                 monthIndexMap[section] = monthIndex
                 sectionIndexMaps[section] = index
                 
-                var numberOfDaysInCurrentSection = numberOfRowsPerSectionThatUserWants * maxNumberOfDaysInWeek
+                var numberOfDaysInCurrentSection = numberOfRowsPerSectionThatUserWants * numberOfDaysInWeek
                 
                 if numberOfDaysInCurrentSection > numberOfDaysInMonthVariable {
                     numberOfDaysInCurrentSection = numberOfDaysInMonthVariable
@@ -123,6 +123,30 @@ public struct Cal {
     }
 }
 
+extension Cal {
+    public func symbols(for style: WeekDayStyle) -> [String] {
+        switch style {
+        case .veryShort:
+            return veryShortWeekdaySymbols
+        case .short:
+            return shortWeekdaySymbols
+        case .standalone:
+            return weekdaySymbols
+        }
+    }
+    
+    public var weekdaySymbols: [String] {
+        return calendar.weekdaySymbols
+    }
+
+    public var shortWeekdaySymbols: [String]  {
+        return calendar.shortWeekdaySymbols
+    }
+
+    public var veryShortWeekdaySymbols: [String]  {
+        return calendar.veryShortWeekdaySymbols
+    }
+}
 
 extension Cal.Range {
     private var monthTimeInterval: TimeInterval {
