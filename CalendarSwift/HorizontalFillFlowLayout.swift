@@ -1,7 +1,8 @@
 import UIKit
 
 class HorizontalFillFlowLayout: UICollectionViewLayout {
-    private weak var delegate: CollectionViewLayoutDelegate!
+    private weak var delegate: CollectionViewLayoutDelegate?
+    public var mode: Mode = .weekly
     
     var cellAttrsDictionary = Dictionary<IndexPath, UICollectionViewLayoutAttributes>()
     var contentSize = CGSize.zero
@@ -10,21 +11,39 @@ class HorizontalFillFlowLayout: UICollectionViewLayout {
         super.init()
     }
     
-    convenience init(delegate: CollectionViewLayoutDelegate) {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        print(aDecoder)
+        mode = .monthly
+        delegate = nil
+    }
+    
+    convenience init(delegate: CollectionViewLayoutDelegate, mode: Mode = .weekly) {
         self.init()
-        
+        self.mode = mode
         self.delegate = delegate
     }
     
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError()
-    }
     override var collectionViewContentSize: CGSize {
         return self.contentSize
     }
     
+    func indalivateLayoutIfNeeded(for mode: Mode) {
+        if shouldInvalidate(for: mode) {
+            invalidateLayout()
+        }
+    }
+    
+    func shouldInvalidate(for mode: Mode) -> Bool {
+        return self.mode != mode
+    }
+    
     override func prepare() {
-        let sectionDaysSize = 7
+        guard let delegate = delegate else {
+            return
+        }
+        
+        let sectionDaysSize = mode.numberOfDays
         let weekDays = delegate.numberOfWeekDays()
         
         let relativeSectionRatio = CGFloat(sectionDaysSize / weekDays)

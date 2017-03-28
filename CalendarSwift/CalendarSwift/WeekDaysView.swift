@@ -80,9 +80,6 @@ public class WeekDaysView: UIView {
         collectionView.isPagingEnabled = true
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
     }
 }
 

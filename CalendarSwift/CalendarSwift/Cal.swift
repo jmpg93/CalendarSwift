@@ -147,6 +147,13 @@ public struct Cal {
         // first day is Monday instead of Sunday which is the default
         return (firstWeekdayOfMonthIndex + firstDayCalValue) % numberOfDaysInWeek
     }
+    
+    func day(at indexPath: IndexPath) -> Day {
+        let month = months[indexPath.section]
+        print("Sections", month.sections)
+        print("sectionIndexMaps", month.sectionIndexMaps)
+        return Day(value: "'", weekDay: .monday, month: months.first!, indexPath: indexPath, isSelected: false)
+    }
 }
 
 extension Cal {

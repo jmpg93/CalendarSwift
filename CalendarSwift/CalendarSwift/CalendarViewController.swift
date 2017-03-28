@@ -14,7 +14,7 @@ public class CalendarViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
+        daysView.delegate = self
         daysView.dataSource = self
         weekDaysView.dataSource = self
     }
@@ -30,25 +30,17 @@ extension CalendarViewController: WeekDaysViewDataSource {
     }
 }
 
-extension CalendarViewController: DaysViewDataSource {
-    public var firstWeekDay: Day.WeekDay {
-        return calendar.firstWeekDay
+extension CalendarViewController: DaysViewDelegate {
+    public func daysView(_ daysView: DaysView, shouldSelectDay day: Day) -> Bool {
+        return true
     }
-    
-    public func numberOfMonths() -> Int {
-        return calendar.months.count
-    }
-    
-    public func numberOfDays(in month: Int) -> Int {
-        return calendar.months[month].numberOfDaysInMonthGrid
-    }
-    
-    public func daysView(_ daysView: DaysView, cellForItemAt indexPath: IndexPath) -> DayCell {
-        let cell = daysView.dequeueReusableCell(for: indexPath)
-        let month = calendar.months[indexPath.section]
+
+    public func daysView(_ daysView: DaysView, willDisplay cell: DayCell, at day: Day) {
+        let month = day.month
+        let indexPath = day.indexPath
         
         let value = indexPath.row + 1 - month.inDates
-        
+
         switch value {
         case Int.min...0:
             cell.update(value: "")
@@ -58,6 +50,10 @@ extension CalendarViewController: DaysViewDataSource {
             cell.update(value: "")
         }
         
-        return cell
+    }
+}
+extension CalendarViewController: DaysViewDataSource {
+    public func configureDaysView(_ daysView: DaysView) -> DaysViewConfiguration {
+        return DaysViewConfiguration(mode: .weekly, firstWeekDay: .monday, calendar: calendar)
     }
 }

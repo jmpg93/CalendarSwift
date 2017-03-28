@@ -6,10 +6,16 @@ public struct Day {
     }
     
     public let value: String
+    public let indexPath: IndexPath
+    public let month: Month
     public let weekDay: WeekDay
+    public let isSelected: Bool
     
-    init(value: String, weekDay: WeekDay) {
+    init(value: String, weekDay: WeekDay, month: Month, indexPath: IndexPath, isSelected: Bool) {
         self.value = value
         self.weekDay = weekDay
+        self.indexPath = indexPath
+        self.isSelected = isSelected
+        self.month = month
     }
 }

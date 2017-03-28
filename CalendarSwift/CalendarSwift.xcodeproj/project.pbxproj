@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C1779591E8700B700A52584 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1779581E8700B700A52584 /* Mode.swift */; };
 		6C5F445C1E7F0328000FEA05 /* LabeledCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F445B1E7F0328000FEA05 /* LabeledCell.swift */; };
 		6C5F44641E7F0F9C000FEA05 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F44631E7F0F9C000FEA05 /* DayCell.swift */; };
 		6C5F44681E7F12F3000FEA05 /* DaysViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5F44671E7F12F3000FEA05 /* DaysViewDelegate.swift */; };
@@ -21,6 +22,7 @@
 		6C69343C1E7EFFD600CB58E4 /* CalendarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C69343B1E7EFFD600CB58E4 /* CalendarViewController.storyboard */; };
 		6CD4B9961E7FF216003B234C /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD4B9951E7FF216003B234C /* CalendarExtensions.swift */; };
 		6CD4B9981E80223F003B234C /* HorizontalFillFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD4B9971E80223F003B234C /* HorizontalFillFlowLayout.swift */; };
+		6CE6BF241E8ADB6C005DF73B /* DaysViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE6BF231E8ADB6C005DF73B /* DaysViewConfiguration.swift */; };
 		6CF15A5F1E7EEDB500C520E1 /* CalendarSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CF15A5D1E7EEDB500C520E1 /* CalendarSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6CF15A681E7EEE0C00C520E1 /* Cal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF15A671E7EEE0C00C520E1 /* Cal.swift */; };
 		6CF15A6B1E7EEEF500C520E1 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF15A6A1E7EEEF500C520E1 /* Month.swift */; };
@@ -44,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C1779581E8700B700A52584 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		6C5F445B1E7F0328000FEA05 /* LabeledCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledCell.swift; sourceTree = "<group>"; };
 		6C5F44631E7F0F9C000FEA05 /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		6C5F44671E7F12F3000FEA05 /* DaysViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaysViewDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +61,7 @@
 		6C69343B1E7EFFD600CB58E4 /* CalendarViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CalendarViewController.storyboard; sourceTree = "<group>"; };
 		6CD4B9951E7FF216003B234C /* CalendarExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		6CD4B9971E80223F003B234C /* HorizontalFillFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HorizontalFillFlowLayout.swift; path = ../HorizontalFillFlowLayout.swift; sourceTree = "<group>"; };
+		6CE6BF231E8ADB6C005DF73B /* DaysViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaysViewConfiguration.swift; sourceTree = "<group>"; };
 		6CF15A5A1E7EEDB500C520E1 /* CalendarSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CalendarSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF15A5D1E7EEDB500C520E1 /* CalendarSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarSwift.h; sourceTree = "<group>"; };
 		6CF15A5E1E7EEDB500C520E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -231,6 +235,8 @@
 				6CF15A6A1E7EEEF500C520E1 /* Month.swift */,
 				6CF15A6C1E7EEF2D00C520E1 /* Week.swift */,
 				6CF15A6E1E7EEFB700C520E1 /* Day.swift */,
+				6C1779581E8700B700A52584 /* Mode.swift */,
+				6CE6BF231E8ADB6C005DF73B /* DaysViewConfiguration.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -368,11 +374,13 @@
 				6C5F44711E7F1DC0000FEA05 /* WeekDaysViewDataSource.swift in Sources */,
 				6CD4B9981E80223F003B234C /* HorizontalFillFlowLayout.swift in Sources */,
 				6C5F446A1E7F1312000FEA05 /* DaysViewDataSource.swift in Sources */,
+				6CE6BF241E8ADB6C005DF73B /* DaysViewConfiguration.swift in Sources */,
 				6C6934351E7EFF3200CB58E4 /* DaysView.swift in Sources */,
 				6C5F44641E7F0F9C000FEA05 /* DayCell.swift in Sources */,
 				6CF15A6B1E7EEEF500C520E1 /* Month.swift in Sources */,
 				6CF15A681E7EEE0C00C520E1 /* Cal.swift in Sources */,
 				6CF15A6F1E7EEFB700C520E1 /* Day.swift in Sources */,
+				6C1779591E8700B700A52584 /* Mode.swift in Sources */,
 				6CF15A6D1E7EEF2D00C520E1 /* Week.swift in Sources */,
 				6C5F44771E7F1E55000FEA05 /* WeekDayCell.swift in Sources */,
 				6C69343A1E7EFF9200CB58E4 /* CalendarViewController.swift in Sources */,
