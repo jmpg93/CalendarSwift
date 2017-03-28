@@ -7,7 +7,7 @@ public enum Mode {
     var numberOfDays: Int {
         switch self {
         case .weekly:
-            return 14
+            return 24
         case .monthly:
             return 7
         }

@@ -83,7 +83,7 @@ extension DaysView: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return configuration.calendar.months[section].numberOfDaysInMonthGrid
+        return configuration.calendar.months[section].numberOfDaysInMonth
     }
     
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

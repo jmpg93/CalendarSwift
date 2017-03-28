@@ -13,7 +13,6 @@ class HorizontalFillFlowLayout: UICollectionViewLayout {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        print(aDecoder)
         mode = .monthly
         delegate = nil
     }
