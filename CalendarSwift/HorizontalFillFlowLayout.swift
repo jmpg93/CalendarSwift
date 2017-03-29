@@ -42,37 +42,39 @@ class HorizontalFillFlowLayout: UICollectionViewLayout {
             return
         }
         
-        let sectionDaysSize = mode.numberOfDays
         let weekDays = delegate.numberOfWeekDays()
-        
-        let relativeSectionRatio = CGFloat(sectionDaysSize / weekDays)
-        
         let width = collectionView!.bounds.size.width
-        let sectionWidth = width * relativeSectionRatio
-        let sectionHeight = width
-        let contentWidth = sectionWidth * CGFloat(collectionView!.numberOfSections)
-        let contentHeight = sectionHeight
-        
-        self.contentSize = CGSize(width: contentWidth, height: contentHeight)
 
         let cellWidth = width / CGFloat(weekDays)
         let cellHeight = cellWidth
         
+        let numberOfRows = mode.numberOfRows
+        var sectionOffset: CGFloat = 0
+        var lastRelativeSectionIndex: Int = 0
+        
         for section in 0...collectionView!.numberOfSections - 1 {
-            let xPosSection = CGFloat(section) * sectionWidth
+            sectionOffset += width * CGFloat(section + lastRelativeSectionIndex)
             for item in 0...collectionView!.numberOfItems(inSection: section) - 1 {
-                let relativeItem = item % sectionDaysSize
+                let dayIndex = item % weekDays
+                let rowIndex = (item / weekDays) % numberOfRows
                 
-                let xPos = CGFloat(relativeItem) * cellWidth + xPosSection
-                let yPos = cellHeight * CGFloat(item / sectionDaysSize)
+                let relativeSectionIndex = item / (weekDays * numberOfRows)
+                let relativeSectionOffset = CGFloat(relativeSectionIndex) * width
+                lastRelativeSectionIndex = relativeSectionIndex
+                
+                let xPos = CGFloat(dayIndex) * cellWidth + sectionOffset + relativeSectionOffset
+                let yPos = CGFloat(rowIndex) * cellHeight
                 
                 let cellIndex = IndexPath(item: item, section: section)
-                let cellAttributes = UICollectionViewLayoutAttributes(forCellWith: cellIndex)
-                cellAttributes.frame = CGRect(x: xPos, y: yPos, width: cellWidth, height: cellHeight)
-                cellAttrsDictionary[cellIndex] = cellAttributes
-                
+                let frame = CGRect(x: xPos, y: yPos, width: cellWidth, height: cellHeight)
+                cellAttrsDictionary[cellIndex] = UICollectionViewLayoutAttributes(forCellWith: cellIndex, frame: frame)
             }
         }
+        
+        let contentHeight = cellHeight * CGFloat(numberOfRows)
+        let contentWidth = sectionOffset
+        
+        self.contentSize = CGSize(width: contentWidth, height: contentHeight)
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -96,5 +98,12 @@ class HorizontalFillFlowLayout: UICollectionViewLayout {
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return cellAttrsDictionary[indexPath]!
+    }
+}
+
+extension UICollectionViewLayoutAttributes {
+    convenience init(forCellWith indexPath: IndexPath, frame: CGRect) {
+        self.init(forCellWith: indexPath)
+        self.frame = frame
     }
 }

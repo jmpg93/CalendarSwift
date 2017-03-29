@@ -4,12 +4,12 @@ public enum Mode {
     case weekly
     case monthly
     
-    var numberOfDays: Int {
+    var numberOfRows: Int {
         switch self {
         case .weekly:
-            return 24
+            return 1
         case .monthly:
-            return 7
+            return 6
         }
     }
 }

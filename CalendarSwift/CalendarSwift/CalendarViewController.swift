@@ -34,21 +34,10 @@ extension CalendarViewController: DaysViewDelegate {
     public func daysView(_ daysView: DaysView, shouldSelectDay day: Day) -> Bool {
         return true
     }
-
+    
     public func daysView(_ daysView: DaysView, willDisplay cell: DayCell, at day: Day) {
-        let month = day.month
         let indexPath = day.indexPath
-        
-        let value = indexPath.row + 1 - month.inDates
-
-        switch value {
-        case Int.min...0:
-            cell.update(value: "")
-        case 1...month.numberOfDaysInMonth:
-            cell.update(value: "\(value)")
-        default:
-            cell.update(value: "")
-        }
+        cell.update(value: "\(indexPath.item + 1)")
         
     }
 }
