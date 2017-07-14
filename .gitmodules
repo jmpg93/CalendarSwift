@@ -1,0 +1,3 @@
+[submodule "CalendarSwift/Submodules"]
+	path = CalendarSwift/Submodules
+	url = https://jmpg93@github.com/jmpg93/TimeSwift
