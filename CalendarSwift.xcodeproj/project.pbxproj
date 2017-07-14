@@ -10,7 +10,18 @@
 		6CF15A5F1E7EEDB500C520E1 /* CalendarSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CF15A5D1E7EEDB500C520E1 /* CalendarSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		181AB9641F194B3700D56BFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 181AB9601F194B3700D56BFE /* TimeSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 185228A11F1945A300E291A6;
+			remoteInfo = TimeSwift;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		181AB9601F194B3700D56BFE /* TimeSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TimeSwift.xcodeproj; path = Submodules/TimeSwift.xcodeproj; sourceTree = "<group>"; };
 		6CF15A5A1E7EEDB500C520E1 /* CalendarSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CalendarSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF15A5D1E7EEDB500C520E1 /* CalendarSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarSwift.h; sourceTree = "<group>"; };
 		6CF15A5E1E7EEDB500C520E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -28,9 +39,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		181AB9611F194B3700D56BFE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				181AB9651F194B3700D56BFE /* TimeSwift.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6CF15A501E7EEDB500C520E1 = {
 			isa = PBXGroup;
 			children = (
+				181AB9601F194B3700D56BFE /* TimeSwift.xcodeproj */,
 				6CF15A891E7EF05700C520E1 /* CalendarSwift.playground */,
 				6CF15A5C1E7EEDB500C520E1 /* CalendarSwift */,
 				6CF15A5B1E7EEDB500C520E1 /* Products */,
@@ -123,12 +143,28 @@
 			mainGroup = 6CF15A501E7EEDB500C520E1;
 			productRefGroup = 6CF15A5B1E7EEDB500C520E1 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 181AB9611F194B3700D56BFE /* Products */;
+					ProjectRef = 181AB9601F194B3700D56BFE /* TimeSwift.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6CF15A591E7EEDB500C520E1 /* CalendarSwift */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		181AB9651F194B3700D56BFE /* TimeSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TimeSwift.framework;
+			remoteRef = 181AB9641F194B3700D56BFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6CF15A581E7EEDB500C520E1 /* Resources */ = {
