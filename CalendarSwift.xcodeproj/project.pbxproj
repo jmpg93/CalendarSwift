@@ -105,6 +105,7 @@
 		181AB96D1F194CB700D56BFE /* Month */ = {
 			isa = PBXGroup;
 			children = (
+				18C96F131F1A1941009F22FD /* Layout */,
 				181AB9771F194E8200D56BFE /* View */,
 				181AB96A1F194B7000D56BFE /* ViewModels */,
 			);
@@ -144,6 +145,13 @@
 				181AB97A1F194E9300D56BFE /* MonthView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		18C96F131F1A1941009F22FD /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Layout;
 			sourceTree = "<group>";
 		};
 		6CF15A501E7EEDB500C520E1 = {

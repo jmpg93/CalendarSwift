@@ -17,7 +17,7 @@ open class MonthViewModel: NSObject {
 	}
 }
 
-// MARK: Public methods
+// MARK: Datasource methods
 
 extension MonthViewModel {
 	open func dayViewModel(at indexPath: IndexPath) -> DayViewModel {
@@ -26,6 +26,29 @@ extension MonthViewModel {
 
 	open func numberOfViewDays() -> Int {
 		return month.numberOfDays
+	}
+}
+
+// MARK: Layout methods
+
+extension MonthViewModel {
+	var minimumLineSpacing: CGFloat {
+		return 0
+	}
+
+	var minimumInteritemSpacing: CGFloat {
+		return 0
+	}
+
+	open func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
+		let itemsPerRow = CGFloat(month.numberOfWeekdays)
+		let width = bounds.width / itemsPerRow
+
+		return CGSize(width: width, height: width)
+	}
+
+	func inset(in bounds: CGRect) -> UIEdgeInsets {
+		return .zero
 	}
 }
 
