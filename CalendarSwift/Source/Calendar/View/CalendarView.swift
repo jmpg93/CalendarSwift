@@ -8,9 +8,37 @@
 
 import Foundation
 
-class CalendarView: UIView {
+open class CalendarView: UIView {
 	@IBOutlet weak var collectionView: UICollectionView!
 	fileprivate var viewModel: CalendarViewModel!
+
+	override open func awakeFromNib() {
+		super.awakeFromNib()
+		setUpCollectionView()
+	}
+
+	open class func instanceFromNib() -> CalendarView {
+		return CalendarView.nib.instantiate()
+	}
+}
+
+// MARK: Public methods
+
+extension CalendarView {
+	open func load(with viewModel: CalendarViewModel) {
+		self.viewModel = viewModel
+		collectionView.delegate = self
+		collectionView.dataSource = self
+	}
+}
+
+// MARK: Private methods
+
+fileprivate extension CalendarView {
+	func setUpCollectionView() {
+		collectionView.register(CalendarViewCell.nib,
+		                        forCellWithReuseIdentifier: CalendarViewCell.identifier)
+	}
 }
 
 // MARK: UICollectionViewDelegate methods
@@ -22,32 +50,39 @@ extension CalendarView: UICollectionViewDelegate {
 // MARK: UICollectionViewDataSource methods
 
 extension CalendarView: UICollectionViewDataSource {
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return viewModel.numberOfMonths()
 	}
 
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+	open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		print("Pre")
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarViewCell.identifier, for: indexPath) as! CalendarViewCell
+		//let cell = collectionView.dequeue(cell: CalendarViewCell.self, at: indexPath)
+		print("Post")
 
-		fatalError()
+		let monthViewModel = viewModel.monthViewModel(at: indexPath)
+		cell.setUp(with: monthViewModel)
+
+		return cell
 	}
 }
 
 // MARK: UICollectionViewDelegateFlowLayout methods
 
 extension CalendarView: UICollectionViewDelegateFlowLayout {
-	public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 		return viewModel.minimumLineSpacing
 	}
 
-	public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 		return viewModel.minimumInteritemSpacing
 	}
 
-	public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		return viewModel.sizeForItem(at: indexPath, in: collectionView.bounds)
 	}
 
-	public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 		return viewModel.inset(in: collectionView.bounds)
 	}
 }

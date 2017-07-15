@@ -26,3 +26,16 @@ extension NibLoadable where Self: UIView {
 }
 
 extension UIView: NibLoadable { }
+
+extension UIView {
+	func pinToEdges(of view: UIView) {
+		view.translatesAutoresizingMaskIntoConstraints = false
+		
+		addSubview(view)
+
+		view.topAnchor.constraint(equalTo: topAnchor)
+		view.bottomAnchor.constraint(equalTo: bottomAnchor)
+		view.trailingAnchor.constraint(equalTo: trailingAnchor)
+		view.leadingAnchor.constraint(equalTo: leadingAnchor)
+	}
+}

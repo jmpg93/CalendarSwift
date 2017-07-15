@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UINib {
-	func instantiate<T: UIView>() -> T {
-		return instantiate(withOwner: nil, options: nil)[0] as! T
+	func instantiate<T: UIView>(owner:  Any? = nil) -> T {
+		return instantiate(withOwner: owner, options: nil)[0] as! T
 	}
 }
