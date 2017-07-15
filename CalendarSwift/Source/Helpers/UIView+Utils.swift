@@ -28,7 +28,7 @@ extension NibLoadable where Self: UIView {
 extension UIView: NibLoadable { }
 
 extension UIView {
-	func pinToEdges(of view: UIView) {
+	public func pinToEdges(of view: UIView) {
 		view.translatesAutoresizingMaskIntoConstraints = false
 		
 		addSubview(view)

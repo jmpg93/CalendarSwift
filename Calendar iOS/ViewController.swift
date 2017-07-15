@@ -17,9 +17,8 @@ class ViewController: UIViewController {
 
 
 		let view: CalendarView = CalendarView.instanceFromNib()
-		view.translatesAutoresizingMaskIntoConstraints	= false
-		view.frame = self.view.bounds
 		view.backgroundColor = .red
+		view.frame = self.view.bounds
 		self.view.addSubview(view)
 		view.load(with: CalendarViewModel(calendar: .current, startDate: Date()))
 

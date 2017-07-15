@@ -54,11 +54,8 @@ extension CalendarView: UICollectionViewDataSource {
 		return viewModel.numberOfMonths()
 	}
 
-	open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		print("Pre")
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarViewCell.identifier, for: indexPath) as! CalendarViewCell
-		//let cell = collectionView.dequeue(cell: CalendarViewCell.self, at: indexPath)
-		print("Post")
+	public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeue(cell: CalendarViewCell.self, at: indexPath)
 
 		let monthViewModel = viewModel.monthViewModel(at: indexPath)
 		cell.setUp(with: monthViewModel)

@@ -17,8 +17,6 @@ public class CalendarViewCell: UICollectionViewCell {
 
 extension CalendarViewCell {
 	public func setUp(with model: MonthViewModel) {
-		monthView = MonthView.instanceFromNib()
-		addMonthView(view: monthView)
 		monthView.load(with: model)
 	}
 }
@@ -26,9 +24,5 @@ extension CalendarViewCell {
 // MARK: Private methods
 
 fileprivate extension CalendarViewCell {
-	func addMonthView(view: MonthView) {
-		monthView?.removeFromSuperview()
-		monthView = view
-		view.pinToEdges(of: self)
-	}
+	
 }
