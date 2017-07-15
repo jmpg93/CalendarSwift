@@ -20,12 +20,22 @@ open class MonthViewModel: NSObject {
 // MARK: Datasource methods
 
 extension MonthViewModel {
-	open func dayViewModel(at indexPath: IndexPath) -> DayViewModel {
-		return DayViewModel(day: month.days[indexPath.item])
+	open func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {
+		switch indexPath.row {
+		case outOfTheMonthIndexRangeLeft, outOfTheMonthIndexRangeRight:
+			return EmptyDayViewModel()
+		case inTheMonthIndexRange:
+			let relativeIndex = indexPath.item - outOfTheMonthIndexRangeLeft.upperBound
+			return DayViewModel(day: month.days[relativeIndex])
+		default:
+			fatalError("Index out of scope")
+		}
 	}
 
 	open func numberOfViewDays() -> Int {
 		return month.numberOfDays
+			+ month.whiteDaysAfterFirstDayOfTheMonth
+			+ month.whiteDaysBeforeEndDayOfTheMonth
 	}
 }
 
@@ -54,6 +64,22 @@ extension MonthViewModel {
 
 // MARK: Private methods
 
-private extension MonthViewModel {
+extension MonthViewModel {
+	public var outOfTheMonthIndexRangeLeft: Range<Int> {
+		let lowerBound = Int.min
+		let upperBound = month.whiteDaysAfterFirstDayOfTheMonth
+		return lowerBound..<upperBound
+	}
 
+	public var inTheMonthIndexRange: Range<Int> {
+		let lowerBound = outOfTheMonthIndexRangeLeft.upperBound
+		let upperBound = lowerBound + month.numberOfDays
+		return lowerBound..<upperBound
+	}
+
+	public var outOfTheMonthIndexRangeRight: Range<Int> {
+		let lowerBound = inTheMonthIndexRange.upperBound
+		let upperBound = Int.max
+		return lowerBound..<upperBound
+	}
 }

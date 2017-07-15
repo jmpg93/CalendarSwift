@@ -9,8 +9,9 @@
 import Foundation
 import TimeSwift
 
-public struct DayViewModel {
+public struct DayViewModel: DayViewModelProtocol {
 	fileprivate let day: Day
+	
 	public init(day: Day) {
 		self.day = day
 	}

@@ -11,7 +11,7 @@ import UIKit
 open class DayView: UICollectionViewCell {
 	@IBOutlet weak var dayLabel: UILabel!
 
-	open func setUp(with model: DayViewModel) {
+	open func setUp(with model: DayViewModelProtocol) {
 		self.dayLabel.text = model.dayValue
 	}
 }
