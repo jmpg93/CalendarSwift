@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1810FDD21F1A0E1A007C8EEB /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1810FDD11F1A0E1A007C8EEB /* UIView+Utils.swift */; };
+		1810FDD41F1A0E8C007C8EEB /* UINib+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1810FDD31F1A0E8C007C8EEB /* UINib+Utils.swift */; };
+		181AB9661F194B5400D56BFE /* TimeSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181AB9651F194B3700D56BFE /* TimeSwift.framework */; };
+		181AB96C1F194B7B00D56BFE /* MonthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181AB96B1F194B7B00D56BFE /* MonthViewModel.swift */; };
+		181AB9721F194D7700D56BFE /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181AB9711F194D7700D56BFE /* DayView.swift */; };
+		181AB9741F194DC300D56BFE /* DayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181AB9731F194DC300D56BFE /* DayView.xib */; };
+		181AB9761F194E1700D56BFE /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181AB9751F194E1700D56BFE /* DayViewModel.swift */; };
+		181AB9791F194E8B00D56BFE /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181AB9781F194E8B00D56BFE /* MonthView.swift */; };
+		181AB97B1F194E9300D56BFE /* MonthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181AB97A1F194E9300D56BFE /* MonthView.xib */; };
+		18A3CCDB1F1A12320060BDC5 /* UICollectionView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A3CCDA1F1A12320060BDC5 /* UICollectionView+Utils.swift */; };
 		6CF15A5F1E7EEDB500C520E1 /* CalendarSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CF15A5D1E7EEDB500C520E1 /* CalendarSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -18,10 +28,26 @@
 			remoteGlobalIDString = 185228A11F1945A300E291A6;
 			remoteInfo = TimeSwift;
 		};
+		181AB9671F194B5C00D56BFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 181AB9601F194B3700D56BFE /* TimeSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 185228A01F1945A300E291A6;
+			remoteInfo = TimeSwift;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1810FDD11F1A0E1A007C8EEB /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Utils.swift"; path = "Helpers/UIView+Utils.swift"; sourceTree = "<group>"; };
+		1810FDD31F1A0E8C007C8EEB /* UINib+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UINib+Utils.swift"; path = "Helpers/UINib+Utils.swift"; sourceTree = "<group>"; };
 		181AB9601F194B3700D56BFE /* TimeSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TimeSwift.xcodeproj; path = Submodules/TimeSwift.xcodeproj; sourceTree = "<group>"; };
+		181AB96B1F194B7B00D56BFE /* MonthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthViewModel.swift; sourceTree = "<group>"; };
+		181AB9711F194D7700D56BFE /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		181AB9731F194DC300D56BFE /* DayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayView.xib; sourceTree = "<group>"; };
+		181AB9751F194E1700D56BFE /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
+		181AB9781F194E8B00D56BFE /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		181AB97A1F194E9300D56BFE /* MonthView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthView.xib; sourceTree = "<group>"; };
+		18A3CCDA1F1A12320060BDC5 /* UICollectionView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Utils.swift"; path = "Helpers/UICollectionView+Utils.swift"; sourceTree = "<group>"; };
 		6CF15A5A1E7EEDB500C520E1 /* CalendarSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CalendarSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF15A5D1E7EEDB500C520E1 /* CalendarSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarSwift.h; sourceTree = "<group>"; };
 		6CF15A5E1E7EEDB500C520E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,18 +59,91 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181AB9661F194B5400D56BFE /* TimeSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1810FDD01F1A0DFB007C8EEB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1810FDD11F1A0E1A007C8EEB /* UIView+Utils.swift */,
+				1810FDD31F1A0E8C007C8EEB /* UINib+Utils.swift */,
+				18A3CCDA1F1A12320060BDC5 /* UICollectionView+Utils.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		181AB9611F194B3700D56BFE /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				181AB9651F194B3700D56BFE /* TimeSwift.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		181AB9691F194B6800D56BFE /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				1810FDD01F1A0DFB007C8EEB /* Helpers */,
+				181AB96E1F194CC400D56BFE /* Day */,
+				181AB96D1F194CB700D56BFE /* Month */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		181AB96A1F194B7000D56BFE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				181AB96B1F194B7B00D56BFE /* MonthViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		181AB96D1F194CB700D56BFE /* Month */ = {
+			isa = PBXGroup;
+			children = (
+				181AB9771F194E8200D56BFE /* View */,
+				181AB96A1F194B7000D56BFE /* ViewModels */,
+			);
+			path = Month;
+			sourceTree = "<group>";
+		};
+		181AB96E1F194CC400D56BFE /* Day */ = {
+			isa = PBXGroup;
+			children = (
+				181AB9701F194CD500D56BFE /* View */,
+				181AB96F1F194CCD00D56BFE /* ViewModel */,
+			);
+			path = Day;
+			sourceTree = "<group>";
+		};
+		181AB96F1F194CCD00D56BFE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				181AB9751F194E1700D56BFE /* DayViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		181AB9701F194CD500D56BFE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				181AB9711F194D7700D56BFE /* DayView.swift */,
+				181AB9731F194DC300D56BFE /* DayView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		181AB9771F194E8200D56BFE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				181AB9781F194E8B00D56BFE /* MonthView.swift */,
+				181AB97A1F194E9300D56BFE /* MonthView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		6CF15A501E7EEDB500C520E1 = {
@@ -68,6 +167,7 @@
 		6CF15A5C1E7EEDB500C520E1 /* CalendarSwift */ = {
 			isa = PBXGroup;
 			children = (
+				181AB9691F194B6800D56BFE /* Source */,
 				6CF15A651E7EEDBA00C520E1 /* Resources */,
 			);
 			path = CalendarSwift;
@@ -108,6 +208,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				181AB9681F194B5C00D56BFE /* PBXTargetDependency */,
 			);
 			name = CalendarSwift;
 			productName = CalendarSwift;
@@ -127,7 +228,7 @@
 					6CF15A591E7EEDB500C520E1 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = L8YSUA92XX;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -171,6 +272,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181AB9741F194DC300D56BFE /* DayView.xib in Resources */,
+				181AB97B1F194E9300D56BFE /* MonthView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,10 +284,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181AB96C1F194B7B00D56BFE /* MonthViewModel.swift in Sources */,
+				1810FDD41F1A0E8C007C8EEB /* UINib+Utils.swift in Sources */,
+				181AB9721F194D7700D56BFE /* DayView.swift in Sources */,
+				1810FDD21F1A0E1A007C8EEB /* UIView+Utils.swift in Sources */,
+				181AB9761F194E1700D56BFE /* DayViewModel.swift in Sources */,
+				18A3CCDB1F1A12320060BDC5 /* UICollectionView+Utils.swift in Sources */,
+				181AB9791F194E8B00D56BFE /* MonthView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		181AB9681F194B5C00D56BFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TimeSwift;
+			targetProxy = 181AB9671F194B5C00D56BFE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		6CF15A601E7EEDB500C520E1 /* Debug */ = {
