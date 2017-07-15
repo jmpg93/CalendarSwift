@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,21 +11,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CalendarView" customModule="CalendarSwift" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7CA-yr-UqA">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </scrollView>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7x2-lJ-vRT">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Phc-wZ-G6G">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="7CA-yr-UqA" secondAttribute="trailing" id="2Mv-2r-SH8"/>
-                <constraint firstItem="7CA-yr-UqA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3mM-ML-nRB"/>
-                <constraint firstItem="7CA-yr-UqA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="7TQ-MP-A2c"/>
-                <constraint firstAttribute="bottom" secondItem="7CA-yr-UqA" secondAttribute="bottom" id="juH-OK-4ef"/>
+                <constraint firstItem="7x2-lJ-vRT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Mh0-FI-bje"/>
+                <constraint firstAttribute="bottom" secondItem="7x2-lJ-vRT" secondAttribute="bottom" id="OEx-qH-mqC"/>
+                <constraint firstAttribute="trailing" secondItem="7x2-lJ-vRT" secondAttribute="trailing" id="TT2-Di-yAv"/>
+                <constraint firstItem="7x2-lJ-vRT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gyV-Pn-yQC"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionView" destination="7x2-lJ-vRT" id="fhl-Uu-q5b"/>
+            </connections>
+            <point key="canvasLocation" x="26.5" y="52.5"/>
         </view>
     </objects>
 </document>

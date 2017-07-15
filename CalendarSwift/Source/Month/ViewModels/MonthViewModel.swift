@@ -9,7 +9,7 @@
 import Foundation
 import TimeSwift
 
-open class MonthViewModel: NSObject {
+public struct MonthViewModel {
 	fileprivate let month: Month
 
 	public init(month: Month) {
@@ -20,7 +20,7 @@ open class MonthViewModel: NSObject {
 // MARK: Datasource methods
 
 extension MonthViewModel {
-	open func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {
+	public func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {
 		switch indexPath.row {
 		case outOfTheMonthIndexRangeLeft, outOfTheMonthIndexRangeRight:
 			return EmptyDayViewModel()
@@ -32,7 +32,7 @@ extension MonthViewModel {
 		}
 	}
 
-	open func numberOfViewDays() -> Int {
+	public func numberOfViewDays() -> Int {
 		return month.numberOfDays
 			+ month.whiteDaysAfterFirstDayOfTheMonth
 			+ month.whiteDaysBeforeEndDayOfTheMonth
@@ -50,7 +50,7 @@ extension MonthViewModel {
 		return 0
 	}
 
-	open func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
+	func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
 		let itemsPerRow = CGFloat(month.numberOfWeekdays)
 		let width = bounds.width / itemsPerRow
 
@@ -64,20 +64,20 @@ extension MonthViewModel {
 
 // MARK: Private methods
 
-extension MonthViewModel {
-	public var outOfTheMonthIndexRangeLeft: Range<Int> {
+fileprivate extension MonthViewModel {
+	var outOfTheMonthIndexRangeLeft: Range<Int> {
 		let lowerBound = Int.min
 		let upperBound = month.whiteDaysAfterFirstDayOfTheMonth
 		return lowerBound..<upperBound
 	}
 
-	public var inTheMonthIndexRange: Range<Int> {
+	var inTheMonthIndexRange: Range<Int> {
 		let lowerBound = outOfTheMonthIndexRangeLeft.upperBound
 		let upperBound = lowerBound + month.numberOfDays
 		return lowerBound..<upperBound
 	}
 
-	public var outOfTheMonthIndexRangeRight: Range<Int> {
+	var outOfTheMonthIndexRangeRight: Range<Int> {
 		let lowerBound = inTheMonthIndexRange.upperBound
 		let upperBound = Int.max
 		return lowerBound..<upperBound
