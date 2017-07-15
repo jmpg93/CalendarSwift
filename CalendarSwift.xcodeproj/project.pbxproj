@@ -20,6 +20,7 @@
 		18C96F151F1A1D50009F22FD /* EmptyDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C96F141F1A1D50009F22FD /* EmptyDayViewModel.swift */; };
 		18C96F171F1A1D59009F22FD /* DayViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C96F161F1A1D59009F22FD /* DayViewModelProtocol.swift */; };
 		18C96F1B1F1A234F009F22FD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C96F1A1F1A234F009F22FD /* CalendarView.swift */; };
+		18C96F1D1F1A33F4009F22FD /* CalendarVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C96F1C1F1A33F4009F22FD /* CalendarVIew.xib */; };
 		6CF15A5F1E7EEDB500C520E1 /* CalendarSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CF15A5D1E7EEDB500C520E1 /* CalendarSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		18C96F141F1A1D50009F22FD /* EmptyDayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDayViewModel.swift; sourceTree = "<group>"; };
 		18C96F161F1A1D59009F22FD /* DayViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewModelProtocol.swift; sourceTree = "<group>"; };
 		18C96F1A1F1A234F009F22FD /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		18C96F1C1F1A33F4009F22FD /* CalendarVIew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarVIew.xib; sourceTree = "<group>"; };
 		6CF15A5A1E7EEDB500C520E1 /* CalendarSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CalendarSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF15A5D1E7EEDB500C520E1 /* CalendarSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarSwift.h; sourceTree = "<group>"; };
 		6CF15A5E1E7EEDB500C520E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				18C96F1A1F1A234F009F22FD /* CalendarView.swift */,
+				18C96F1C1F1A33F4009F22FD /* CalendarVIew.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				181AB9741F194DC300D56BFE /* DayView.xib in Resources */,
+				18C96F1D1F1A33F4009F22FD /* CalendarVIew.xib in Resources */,
 				181AB97B1F194E9300D56BFE /* MonthView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
