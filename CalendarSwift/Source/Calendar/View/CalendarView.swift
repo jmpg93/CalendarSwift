@@ -16,7 +16,6 @@ open class CalendarView: UIView {
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
 		layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .horizontal
 		collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
 		collectionView.constraintToBounds(of: self)
 		setUpCollectionView()

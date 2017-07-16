@@ -50,7 +50,8 @@ extension CalendarViewModel {
 	}
 
 	func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
-		return CGSize(width: bounds.width, height: bounds.width)
+		let width = min(bounds.width, bounds.height)
+		return CGSize(width: width, height: width)
 	}
 
 	func inset(in bounds: CGRect) -> UIEdgeInsets {
