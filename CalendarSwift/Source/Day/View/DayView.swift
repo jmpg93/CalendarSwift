@@ -9,7 +9,22 @@
 import UIKit
 
 open class DayView: UICollectionViewCell {
-	@IBOutlet weak var dayLabel: UILabel!
+	fileprivate var dayLabel: UILabel!
+
+	public override init(frame: CGRect) {
+		super.init(frame: frame)
+		dayLabel = UILabel(frame: frame)
+		dayLabel.textAlignment = .center
+		dayLabel.backgroundColor = .red
+		dayLabel.constraintToBounds(of: self)
+	}
+
+	public required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		dayLabel = UILabel(coder: aDecoder)
+		dayLabel.textAlignment = .center
+		dayLabel.constraintToBounds(of: self)
+	}
 
 	open func setUp(with model: DayViewModelProtocol) {
 		self.dayLabel.text = model.dayValue

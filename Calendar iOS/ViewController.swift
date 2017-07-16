@@ -8,20 +8,18 @@
 
 import UIKit
 import CalendarSwift
+import TimeSwift
 
 class ViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
 
+		let viewModel = CalendarViewModel(startDate: Date())
+		let view = CalendarView(frame: self.view.bounds)
+		view.load(with: viewModel)
 
-		let view: CalendarView = CalendarView.instanceFromNib()
-		view.backgroundColor = .red
-		view.frame = self.view.bounds
-		self.view.addSubview(view)
-		view.load(with: CalendarViewModel(calendar: .current, startDate: Date()))
-
+		view.constraintToBounds(of: self.view)
 	}
 }
 

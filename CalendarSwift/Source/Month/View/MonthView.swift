@@ -8,23 +8,31 @@
 
 import Foundation
 
-open class MonthView: UIView {
-	@IBOutlet weak var collectionView: UICollectionView!
+open class MonthView: UICollectionViewCell {
+	fileprivate var layout: UICollectionViewFlowLayout!
+	fileprivate var collectionView: UICollectionView!
 	fileprivate var viewModel: MonthViewModel!
 
-	open override func awakeFromNib() {
-		super.awakeFromNib()
-		registerCells()
+	public override init(frame: CGRect) {
+		super.init(frame: frame)
+		layout = UICollectionViewFlowLayout()
+		collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+		collectionView.constraintToBounds(of: self)
+		setUpCollectionView()
+	}
+
+	public required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		collectionView = UICollectionView(coder: aDecoder)
+		layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+		collectionView.constraintToBounds(of: self)
+		setUpCollectionView()
 	}
 }
 
 // MARK: Public methods
 
 extension MonthView {
-	open class func instanceFromNib() -> MonthView {
-		return MonthView.nib.instantiate()
-	}
-
 	open func load(with viewModel: MonthViewModel) {
 		self.viewModel = viewModel
 		self.collectionView.delegate = self
@@ -35,9 +43,8 @@ extension MonthView {
 // MARK: Private methods
 
 private extension MonthView {
-	func registerCells() {
-		collectionView.register(DayView.nib,
-		                        forCellWithReuseIdentifier: DayView.identifier)
+	func setUpCollectionView() {
+		collectionView.register(DayView.self)
 	}
 }
 

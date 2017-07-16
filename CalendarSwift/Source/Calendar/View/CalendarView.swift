@@ -9,16 +9,25 @@
 import Foundation
 
 open class CalendarView: UIView {
-	@IBOutlet weak var collectionView: UICollectionView!
+	fileprivate var layout: UICollectionViewFlowLayout!
+	fileprivate var collectionView: UICollectionView!
 	fileprivate var viewModel: CalendarViewModel!
 
-	override open func awakeFromNib() {
-		super.awakeFromNib()
+	public override init(frame: CGRect) {
+		super.init(frame: frame)
+		layout = UICollectionViewFlowLayout()
+		layout.scrollDirection = .horizontal
+		collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+		collectionView.constraintToBounds(of: self)
 		setUpCollectionView()
 	}
 
-	open class func instanceFromNib() -> CalendarView {
-		return CalendarView.nib.instantiate()
+	public required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		collectionView = UICollectionView(coder: aDecoder)
+		layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+		collectionView.constraintToBounds(of: self)
+		setUpCollectionView()
 	}
 }
 
@@ -36,8 +45,7 @@ extension CalendarView {
 
 fileprivate extension CalendarView {
 	func setUpCollectionView() {
-		collectionView.register(CalendarViewCell.nib,
-		                        forCellWithReuseIdentifier: CalendarViewCell.identifier)
+		collectionView.register(MonthView.self)
 	}
 }
 
@@ -55,10 +63,10 @@ extension CalendarView: UICollectionViewDataSource {
 	}
 
 	public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeue(cell: CalendarViewCell.self, at: indexPath)
+		let cell = collectionView.dequeue(cell: MonthView.self, at: indexPath)
 
 		let monthViewModel = viewModel.monthViewModel(at: indexPath)
-		cell.setUp(with: monthViewModel)
+		cell.load(with: monthViewModel)
 
 		return cell
 	}

@@ -28,14 +28,14 @@ extension NibLoadable where Self: UIView {
 extension UIView: NibLoadable { }
 
 extension UIView {
-	public func pinToEdges(of view: UIView) {
-		view.translatesAutoresizingMaskIntoConstraints = false
-		
-		addSubview(view)
+	public func constraintToBounds(of view: UIView) {
+		translatesAutoresizingMaskIntoConstraints = false
 
-		view.topAnchor.constraint(equalTo: topAnchor)
-		view.bottomAnchor.constraint(equalTo: bottomAnchor)
-		view.trailingAnchor.constraint(equalTo: trailingAnchor)
-		view.leadingAnchor.constraint(equalTo: leadingAnchor)
+		view.addSubview(self)
+
+		topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+		bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+		trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+		leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
 	}
 }
