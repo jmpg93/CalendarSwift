@@ -9,23 +9,18 @@
 import Foundation
 
 open class CalendarView: UIView {
-	fileprivate var layout: UICollectionViewFlowLayout!
 	fileprivate var collectionView: UICollectionView!
 	fileprivate var viewModel: CalendarViewModel!
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-		layout = UICollectionViewFlowLayout()
-		collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
-		collectionView.constraintToBounds(of: self)
+		collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
 		setUpCollectionView()
 	}
 
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		collectionView = UICollectionView(coder: aDecoder)
-		layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-		collectionView.constraintToBounds(of: self)
 		setUpCollectionView()
 	}
 }
@@ -44,6 +39,7 @@ extension CalendarView {
 
 fileprivate extension CalendarView {
 	func setUpCollectionView() {
+		collectionView.constraintToBounds(of: self)
 		collectionView.register(MonthView.self)
 	}
 }
