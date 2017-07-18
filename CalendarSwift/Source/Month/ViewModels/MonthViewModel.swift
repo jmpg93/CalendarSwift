@@ -15,14 +15,20 @@ public struct MonthViewModel {
 	public init(month: Month) {
 		self.month = month
 	}
+
+	var symbol: String {
+		return month.symbol
+	}
 }
 
 // MARK: Datasource methods
 
 extension MonthViewModel {
 	public func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {
-		switch indexPath.row {
-		case outOfTheMonthIndexRangeLeft, outOfTheMonthIndexRangeRight:
+		switch indexPath.item {
+		case outOfTheMonthIndexRangeLeft:
+			return EmptyDayViewModel()
+		case outOfTheMonthIndexRangeRight:
 			return EmptyDayViewModel()
 		case inTheMonthIndexRange:
 			let relativeIndex = indexPath.item - outOfTheMonthIndexRangeLeft.upperBound
@@ -34,8 +40,8 @@ extension MonthViewModel {
 
 	public func numberOfViewDays() -> Int {
 		return month.numberOfDays
-			+ month.whiteDaysAfterFirstDayOfTheMonth
-			+ month.whiteDaysBeforeEndDayOfTheMonth
+			+ month.whiteDaysAfterEndDayOfTheMonth
+			+ month.whiteDaysBeforeFirstDayOfTheMonth
 	}
 }
 
@@ -67,11 +73,14 @@ extension MonthViewModel {
 fileprivate extension MonthViewModel {
 	var outOfTheMonthIndexRangeLeft: Range<Int> {
 		let lowerBound = Int.min
-		let upperBound = month.whiteDaysAfterFirstDayOfTheMonth
+		let upperBound = month.whiteDaysBeforeFirstDayOfTheMonth
 		return lowerBound..<upperBound
 	}
 
 	var inTheMonthIndexRange: Range<Int> {
+		if month.month == 8 {
+			print("")
+		}
 		let lowerBound = outOfTheMonthIndexRangeLeft.upperBound
 		let upperBound = lowerBound + month.numberOfDays
 		return lowerBound..<upperBound
@@ -81,5 +90,15 @@ fileprivate extension MonthViewModel {
 		let lowerBound = inTheMonthIndexRange.upperBound
 		let upperBound = Int.max
 		return lowerBound..<upperBound
+	}
+}
+
+extension Month {
+	public var whiteDaysBeforeFirstDayOfTheMonth: Int {
+		return firstDayOfTheMonthDay.weekday.advanced(by: -1)
+	}
+
+	public var whiteDaysAfterEndDayOfTheMonth: Int {
+		return numberOfWeekdays - lastDayOfTheMonthDay.weekday
 	}
 }

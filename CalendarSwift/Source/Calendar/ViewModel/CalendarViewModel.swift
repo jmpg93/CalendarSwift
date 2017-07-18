@@ -30,7 +30,7 @@ public struct CalendarViewModel {
 
 extension CalendarViewModel {
 	func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
-		return MonthViewModel(month: months[indexPath.row])
+		return MonthViewModel(month: months[indexPath.item])
 	}
 
 	func numberOfMonths() -> Int {
@@ -52,10 +52,22 @@ extension CalendarViewModel {
 	func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
 		let month = months[indexPath.item]
 
-		let days = (month.numberOfDays + month.whiteDaysBeforeEndDayOfTheMonth + month.whiteDaysAfterFirstDayOfTheMonth)
+		let days = (month.numberOfDays + month.whiteDaysAfterEndDayOfTheMonth + month.whiteDaysBeforeFirstDayOfTheMonth)
 		let weeks = days / month.numberOfWeekdays
-		let width = min(bounds.width, bounds.height)
+		let width = bounds.width
 		let height = (width / CGFloat(month.numberOfWeekdays)) * CGFloat(weeks)
+
+		assert(days % month.numberOfWeekdays == 0)
+
+		print(month.symbol)
+		print("White before", month.whiteDaysBeforeFirstDayOfTheMonth)
+		print("White afer", month.whiteDaysAfterEndDayOfTheMonth)
+		print("Real days", month.numberOfDays)
+		print("Visual days", days)
+		print("Weekdays", month.numberOfWeekdays)
+		print("Weeks", days / month.numberOfWeekdays)
+		print("Size", CGSize(width: width, height: height))
+		print(" ")
 
 		return CGSize(width: width, height: height)
 	}

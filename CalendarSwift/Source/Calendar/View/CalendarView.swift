@@ -14,7 +14,8 @@ open class CalendarView: UIView {
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-		collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
+		let layout = UICollectionViewFlowLayout()
+		collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
 		setUpCollectionView()
 	}
 
@@ -59,7 +60,7 @@ extension CalendarView: UICollectionViewDataSource {
 
 	public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeue(cell: MonthView.self, at: indexPath)
-
+		
 		let monthViewModel = viewModel.monthViewModel(at: indexPath)
 		cell.load(with: monthViewModel)
 
