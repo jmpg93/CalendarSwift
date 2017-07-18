@@ -51,8 +51,11 @@ extension CalendarViewModel {
 
 	func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
 		let month = months[indexPath.item]
+
+		let days = (month.numberOfDays + month.whiteDaysBeforeEndDayOfTheMonth + month.whiteDaysAfterFirstDayOfTheMonth)
+		let weeks = days / month.numberOfWeekdays
 		let width = min(bounds.width, bounds.height)
-		let height = (width / CGFloat(month.numberOfWeekdays)) * CGFloat(month.numberOfWeeks)
+		let height = (width / CGFloat(month.numberOfWeekdays)) * CGFloat(weeks)
 
 		return CGSize(width: width, height: height)
 	}

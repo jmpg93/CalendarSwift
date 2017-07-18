@@ -15,7 +15,10 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let viewModel = CalendarViewModel(startDate: Date())
+		var calendar = Calendar.current
+		calendar.locale = .current
+
+		let viewModel = CalendarViewModel(calendar: calendar, startDate: Date())
 		let view = CalendarView(frame: self.view.bounds)
 		view.load(with: viewModel)
 
