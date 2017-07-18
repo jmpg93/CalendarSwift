@@ -9,15 +9,30 @@
 import Foundation
 import TimeSwift
 
-public struct MonthViewModel {
+public class MonthViewModel {
 	fileprivate let month: Month
+	fileprivate let layout: MonthViewLayout
 
-	public init(month: Month) {
+	//TODO: Change
+	public init(month: Month, layout: MonthViewLayout = MonthlyMonthViewLayout()) {
 		self.month = month
+		self.layout = layout
 	}
 
 	var symbol: String {
 		return month.symbol
+	}
+
+	var numberOfWeeks: Int {
+		return month.numberOfWeeks
+	}
+
+	var numberOfDays: Int {
+		return month.numberOfDays
+	}
+
+	var numberOfWeekdays: Int {
+		return month.numberOfWeekdays
 	}
 }
 
@@ -38,7 +53,7 @@ extension MonthViewModel {
 		}
 	}
 
-	public func numberOfViewDays() -> Int {
+	public var numberOfViewDays: Int {
 		return month.numberOfDays
 			+ month.whiteDaysAfterEndDayOfTheMonth
 			+ month.whiteDaysBeforeFirstDayOfTheMonth
@@ -57,14 +72,11 @@ extension MonthViewModel {
 	}
 
 	func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
-		let itemsPerRow = CGFloat(month.numberOfWeekdays)
-		let width = bounds.width / itemsPerRow
-
-		return CGSize(width: width, height: width)
+		return layout.itemSize(at: indexPath, in: bounds, using: self)
 	}
 
 	func inset(in bounds: CGRect) -> UIEdgeInsets {
-		return .zero
+		return layout.inset(in: bounds, using: self)
 	}
 }
 
@@ -78,9 +90,6 @@ fileprivate extension MonthViewModel {
 	}
 
 	var inTheMonthIndexRange: Range<Int> {
-		if month.month == 8 {
-			print("")
-		}
 		let lowerBound = outOfTheMonthIndexRangeLeft.upperBound
 		let upperBound = lowerBound + month.numberOfDays
 		return lowerBound..<upperBound

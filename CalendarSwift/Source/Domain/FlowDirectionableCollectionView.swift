@@ -1,7 +1,12 @@
-import UIKit
-import CalendarSwift
-import TimeSwift
-import PlaygroundSupport
+//
+//  DirectionableCollectionView.swift
+//  CalendarSwift
+//
+//  Created by jmpuerta on 18/7/17.
+//  Copyright © 2017 Jose Maria Puerta. All rights reserved.
+//
+
+import Foundation
 
 protocol UICollectionViewDelegateFlowDirection: class {
 	var scrollDirection: UICollectionViewScrollDirection { get }
@@ -20,7 +25,7 @@ class DirectionableFlowLayout: UICollectionViewFlowLayout {
 	}
 }
 
-class FlowCollectionView: UICollectionView, UICollectionViewDelegateFlowDirection {
+class FlowDirectionableCollectionView: UICollectionView, UICollectionViewDelegateFlowDirection {
 	convenience init(frame: CGRect) {
 		let layout = DirectionableFlowLayout()
 		self.init(frame: frame, collectionViewLayout: layout)
@@ -31,6 +36,3 @@ class FlowCollectionView: UICollectionView, UICollectionViewDelegateFlowDirectio
 		return .horizontal
 	}
 }
-
-FlowCollectionView(frame: .zero)
-PlaygroundPage.current.needsIndefiniteExecution = true

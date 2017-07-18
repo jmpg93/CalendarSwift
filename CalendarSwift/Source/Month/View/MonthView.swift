@@ -30,6 +30,7 @@ open class MonthView: UICollectionViewCell {
 extension MonthView {
 	open func load(with viewModel: MonthViewModel) {
 		self.viewModel = viewModel
+
 		self.collectionView.delegate = self
 		self.collectionView.dataSource = self
 
@@ -60,7 +61,7 @@ extension MonthView: UICollectionViewDataSource {
 	}
 
 	open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return viewModel.numberOfViewDays()
+		return viewModel.numberOfViewDays
 	}
 }
 

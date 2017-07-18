@@ -9,19 +9,21 @@
 import Foundation
 import TimeSwift
 
-public struct CalendarViewModel {
-	fileprivate let calendar: Calendar
-	fileprivate let startDate: Date
-
+public class CalendarViewModel  {
 	fileprivate var months: [Month] = []
-	fileprivate var currentMonth: Month
+	fileprivate var layout: CalendarViewLayout
 
-	public init(calendar: Calendar = .current, startDate: Date) {
-		self.calendar = calendar
-		self.startDate = startDate
+	public init(months: [Month], layout: CalendarViewLayout = MonthlyCalendarViewLayout()) {
+		self.months = months
+		self.layout = layout
+	}
 
-		self.currentMonth = Month(date: startDate, in: calendar)
-		self.months = currentMonth.year.months
+	public convenience init(years: [Year], layout: CalendarViewLayout) {
+		self.init(months: years.flatMap({ $0.months }), layout: layout)
+	}
+
+	public convenience init(year: Year, layout: CalendarViewLayout) {
+		self.init(months: year.months, layout: layout)
 	}
 }
 
@@ -29,7 +31,7 @@ public struct CalendarViewModel {
 // MARK: DataSource method
 
 extension CalendarViewModel {
-	func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
+	public func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
 		return MonthViewModel(month: months[indexPath.item])
 	}
 
@@ -42,38 +44,19 @@ extension CalendarViewModel {
 
 extension CalendarViewModel {
 	var minimumLineSpacing: CGFloat {
-		return 0
+		return layout.minimumLineSpacing
 	}
 
 	var minimumInteritemSpacing: CGFloat {
-		return 0
+		return layout.minimumInteritemSpacing
 	}
 
 	func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
-		let month = months[indexPath.item]
-
-		let days = (month.numberOfDays + month.whiteDaysAfterEndDayOfTheMonth + month.whiteDaysBeforeFirstDayOfTheMonth)
-		let weeks = days / month.numberOfWeekdays
-		let width = bounds.width
-		let height = (width / CGFloat(month.numberOfWeekdays)) * CGFloat(weeks)
-
-		assert(days % month.numberOfWeekdays == 0)
-
-		print(month.symbol)
-		print("White before", month.whiteDaysBeforeFirstDayOfTheMonth)
-		print("White afer", month.whiteDaysAfterEndDayOfTheMonth)
-		print("Real days", month.numberOfDays)
-		print("Visual days", days)
-		print("Weekdays", month.numberOfWeekdays)
-		print("Weeks", days / month.numberOfWeekdays)
-		print("Size", CGSize(width: width, height: height))
-		print(" ")
-
-		return CGSize(width: width, height: height)
+		return layout.itemSize(at: indexPath, in: bounds, using: self)
 	}
 
 	func inset(in bounds: CGRect) -> UIEdgeInsets {
-		return .zero
+		return layout.inset(in: bounds, using: self)
 	}
 }
 
