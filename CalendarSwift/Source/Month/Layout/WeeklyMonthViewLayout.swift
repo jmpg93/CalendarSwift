@@ -9,6 +9,8 @@
 import Foundation
 
 public class WeeklyMonthViewLayout: MonthViewLayout {
+	public init() { }
+	
 	public func dayViewModel(at indexPath: IndexPath, in viewModel: MonthViewModel) -> DayViewModelProtocol {
 		return DayViewModel(day: viewModel.day(at: indexPath))
 	}

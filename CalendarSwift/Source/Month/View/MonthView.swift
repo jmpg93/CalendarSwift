@@ -44,7 +44,7 @@ private extension MonthView {
 	func setUpCollectionView() {
 		collectionView.constraintToBounds(of: self)
 		collectionView.register(DayView.self)
-		collectionView.backgroundColor = .blue
+		collectionView.backgroundColor = .white
 	}
 }
 

@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 		calendar.locale = .current
 
 		let year = Year(date: Date(), in: calendar)
-		let viewModel = CalendarViewModel(months: year.months)
+		let viewModel = CalendarViewModel(months: year.months, layout: MonthlyCalendarViewLayout())
 		
 		let view = CalendarView(frame: self.view.bounds)
 		view.load(with: viewModel)

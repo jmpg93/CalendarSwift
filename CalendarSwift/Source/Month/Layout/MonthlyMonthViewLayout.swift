@@ -9,6 +9,8 @@
 import UIKit
 
 public class MonthlyMonthViewLayout: MonthViewLayout {
+	public init() { }
+	
 	public var minimumInteritemSpacing: CGFloat {
 		return 0
 	}

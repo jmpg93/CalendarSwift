@@ -15,7 +15,7 @@ open class DayView: UICollectionViewCell {
 		super.init(frame: frame)
 		dayLabel = UILabel(frame: frame)
 		dayLabel.textAlignment = .center
-		dayLabel.backgroundColor = .red
+		dayLabel.backgroundColor = .white
 		dayLabel.constraintToBounds(of: self)
 	}
 

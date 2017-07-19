@@ -13,6 +13,8 @@ public protocol CalendarViewLayout {
 	var minimumLineSpacing: CGFloat { get }
 	var scrollDirection: UICollectionViewScrollDirection { get }
 
+	var monthLayout: MonthViewLayout { get }
+
 	func itemSize(at indexPath: IndexPath, in bounds: CGRect, using viewModel: CalendarViewModel) -> CGSize
 	func inset(in bounds: CGRect, using viewModel: CalendarViewModel) -> UIEdgeInsets
 }

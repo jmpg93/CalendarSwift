@@ -9,6 +9,8 @@
 import Foundation
 
 public class WeeklyCalendarViewLayout: CalendarViewLayout {
+	public init() { }
+	
 	public var minimumInteritemSpacing: CGFloat {
 		return 0
 	}
@@ -19,6 +21,10 @@ public class WeeklyCalendarViewLayout: CalendarViewLayout {
 
 	public var scrollDirection: UICollectionViewScrollDirection {
 		return .horizontal
+	}
+
+	public 	var monthLayout: MonthViewLayout {
+		return WeeklyMonthViewLayout()
 	}
 
 	public func inset(in bounds: CGRect, using model: CalendarViewModel) -> UIEdgeInsets {
@@ -35,4 +41,3 @@ public class WeeklyCalendarViewLayout: CalendarViewLayout {
 		return CGSize(width: monthWidth, height: bounds.height)
 	}
 }
-

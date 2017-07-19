@@ -13,7 +13,7 @@ public class CalendarViewModel  {
 	fileprivate var months: [Month] = []
 	fileprivate var layout: CalendarViewLayout
 
-	public init(months: [Month], layout: CalendarViewLayout = MonthlyCalendarViewLayout()) {
+	public init(months: [Month], layout: CalendarViewLayout) {
 		self.months = months
 		self.layout = layout
 	}
@@ -32,7 +32,7 @@ public class CalendarViewModel  {
 
 extension CalendarViewModel {
 	public func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
-		return MonthViewModel(month: months[indexPath.item])
+		return MonthViewModel(month: months[indexPath.item], layout: layout.monthLayout)
 	}
 
 	func numberOfMonths() -> Int {
