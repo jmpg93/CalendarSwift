@@ -13,6 +13,9 @@ public protocol MonthViewLayout {
 	var minimumLineSpacing: CGFloat { get }
 	var scrollDirection: UICollectionViewScrollDirection { get }
 
+	func numberOfDays(in month: MonthViewModel) -> Int
+	func dayViewModel(at indexPath: IndexPath, in viewModel: MonthViewModel) -> DayViewModelProtocol
+	
 	func itemSize(at indexPath: IndexPath, in bounds: CGRect, using viewModel: MonthViewModel) -> CGSize
 	func inset(in bounds: CGRect, using viewModel: MonthViewModel) -> UIEdgeInsets
 }

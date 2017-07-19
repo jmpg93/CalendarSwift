@@ -9,18 +9,18 @@
 import Foundation
 
 open class CalendarView: UIView {
-	fileprivate var collectionView: UICollectionView!
+	fileprivate var collectionView: FlowDirectionableCollectionView!
 	fileprivate var viewModel: CalendarViewModel!
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-		collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
+		collectionView = FlowDirectionableCollectionView(frame: frame)
 		setUpCollectionView()
 	}
 
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		collectionView = UICollectionView(coder: aDecoder)
+		collectionView = FlowDirectionableCollectionView(coder: aDecoder)
 		setUpCollectionView()
 	}
 }
@@ -31,7 +31,7 @@ extension CalendarView {
 	open func load(with viewModel: CalendarViewModel) {
 		self.viewModel = viewModel
 
-		collectionView.delegate = self
+		collectionView.flowDelegate = self
 		collectionView.dataSource = self
 	
 		collectionView.reloadData()
@@ -72,7 +72,11 @@ extension CalendarView: UICollectionViewDataSource {
 
 // MARK: UICollectionViewDelegateFlowLayout methods
 
-extension CalendarView: UICollectionViewDelegateFlowLayout {
+extension CalendarView: UICollectionViewDelegateFlowDirection {
+	var scrollDirection: UICollectionViewScrollDirection {
+		return viewModel.scrollDirection
+	}
+
 	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 		return viewModel.minimumLineSpacing
 	}

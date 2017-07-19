@@ -1,5 +1,5 @@
 //
-//  WeeklyMontyViewLayout.swift
+//  WeeklyMonthViewLayout.swift
 //  CalendarSwift
 //
 //  Created by jmpuerta on 18/7/17.
@@ -8,7 +8,15 @@
 
 import Foundation
 
-public class WeeklyMonthlyViewLayout: MonthViewLayout {
+public class WeeklyMonthViewLayout: MonthViewLayout {
+	public func dayViewModel(at indexPath: IndexPath, in viewModel: MonthViewModel) -> DayViewModelProtocol {
+		return DayViewModel(day: viewModel.day(at: indexPath))
+	}
+
+	public func numberOfDays(in month: MonthViewModel) -> Int {
+		return month.numberOfDays
+	}
+
 	public var minimumInteritemSpacing: CGFloat {
 		return 0
 	}
@@ -27,7 +35,8 @@ public class WeeklyMonthlyViewLayout: MonthViewLayout {
 
 	public func itemSize(at indexPath: IndexPath, in bounds: CGRect, using model: MonthViewModel) -> CGSize {
 		let itemsPerRow = CGFloat(model.numberOfWeekdays)
-		let width = bounds.width / itemsPerRow
+		//TODO: Avoid main screen
+		let width = UIScreen.main.bounds.width / itemsPerRow
 		return CGSize(width: width, height: bounds.height)
 	}
 }

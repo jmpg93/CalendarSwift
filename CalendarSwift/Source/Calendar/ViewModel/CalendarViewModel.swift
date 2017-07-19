@@ -51,6 +51,10 @@ extension CalendarViewModel {
 		return layout.minimumInteritemSpacing
 	}
 
+	var scrollDirection: UICollectionViewScrollDirection {
+		return layout.scrollDirection
+	}
+
 	func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
 		return layout.itemSize(at: indexPath, in: bounds, using: self)
 	}

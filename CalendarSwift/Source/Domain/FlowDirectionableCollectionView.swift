@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UICollectionViewDelegateFlowDirection: class {
+protocol UICollectionViewDelegateFlowDirection: UICollectionViewDelegateFlowLayout {
 	var scrollDirection: UICollectionViewScrollDirection { get }
 }
 
@@ -26,6 +26,10 @@ class DirectionableFlowLayout: UICollectionViewFlowLayout {
 }
 
 class FlowDirectionableCollectionView: UICollectionView, UICollectionViewDelegateFlowDirection {
+	weak var flowDelegate: UICollectionViewDelegateFlowDirection? {
+		didSet { self.delegate = flowDelegate }
+	}
+
 	convenience init(frame: CGRect) {
 		let layout = DirectionableFlowLayout()
 		self.init(frame: frame, collectionViewLayout: layout)
@@ -33,6 +37,6 @@ class FlowDirectionableCollectionView: UICollectionView, UICollectionViewDelegat
 	}
 
 	var scrollDirection: UICollectionViewScrollDirection {
-		return .horizontal
+		return flowDelegate?.scrollDirection ?? .vertical
 	}
 }

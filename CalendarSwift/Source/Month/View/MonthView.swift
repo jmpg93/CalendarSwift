@@ -9,18 +9,18 @@
 import Foundation
 
 open class MonthView: UICollectionViewCell {
-	fileprivate var collectionView: UICollectionView!
+	fileprivate var collectionView: FlowDirectionableCollectionView!
 	fileprivate var viewModel: MonthViewModel!
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-		collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
+		collectionView = FlowDirectionableCollectionView(frame: frame)
 		setUpCollectionView()
 	}
 
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		collectionView = UICollectionView(coder: aDecoder)
+		collectionView = FlowDirectionableCollectionView(coder: aDecoder)
 		setUpCollectionView()
 	}
 }
@@ -31,7 +31,7 @@ extension MonthView {
 	open func load(with viewModel: MonthViewModel) {
 		self.viewModel = viewModel
 
-		self.collectionView.delegate = self
+		self.collectionView.flowDelegate = self
 		self.collectionView.dataSource = self
 
 		self.collectionView.reloadData()
@@ -73,7 +73,11 @@ extension MonthView: UICollectionViewDelegate {
 
 // MARK: UICollectionViewDelegateFlowLayout methods
 
-extension MonthView: UICollectionViewDelegateFlowLayout {
+extension MonthView: UICollectionViewDelegateFlowDirection {
+	var scrollDirection: UICollectionViewScrollDirection {
+		return viewModel.scrollDirection
+	}
+
 	public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 		return viewModel.minimumLineSpacing
 	}

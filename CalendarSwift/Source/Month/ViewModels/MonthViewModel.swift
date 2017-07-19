@@ -34,29 +34,29 @@ public class MonthViewModel {
 	var numberOfWeekdays: Int {
 		return month.numberOfWeekdays
 	}
+
+	var whiteDaysBeforeFirstDayOfTheMonth: Int {
+		return month.firstDayOfTheMonthDay.weekday.advanced(by: -1)
+	}
+
+	public var whiteDaysAfterEndDayOfTheMonth: Int {
+		return month.numberOfWeekdays - month.lastDayOfTheMonthDay.weekday
+	}
 }
 
 // MARK: Datasource methods
 
 extension MonthViewModel {
+	public func day(at indexPath: IndexPath) -> Day {
+		return month.days[indexPath.item]
+	}
+
 	public func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {
-		switch indexPath.item {
-		case outOfTheMonthIndexRangeLeft:
-			return EmptyDayViewModel()
-		case outOfTheMonthIndexRangeRight:
-			return EmptyDayViewModel()
-		case inTheMonthIndexRange:
-			let relativeIndex = indexPath.item - outOfTheMonthIndexRangeLeft.upperBound
-			return DayViewModel(day: month.days[relativeIndex])
-		default:
-			fatalError("Index out of scope")
-		}
+		return layout.dayViewModel(at: indexPath, in: self)
 	}
 
 	public var numberOfViewDays: Int {
-		return month.numberOfDays
-			+ month.whiteDaysAfterEndDayOfTheMonth
-			+ month.whiteDaysBeforeFirstDayOfTheMonth
+		return layout.numberOfDays(in: self)
 	}
 }
 
@@ -71,6 +71,10 @@ extension MonthViewModel {
 		return 0
 	}
 
+	var scrollDirection: UICollectionViewScrollDirection {
+		return layout.scrollDirection
+	}
+
 	func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
 		return layout.itemSize(at: indexPath, in: bounds, using: self)
 	}
@@ -81,33 +85,3 @@ extension MonthViewModel {
 }
 
 // MARK: Private methods
-
-fileprivate extension MonthViewModel {
-	var outOfTheMonthIndexRangeLeft: Range<Int> {
-		let lowerBound = Int.min
-		let upperBound = month.whiteDaysBeforeFirstDayOfTheMonth
-		return lowerBound..<upperBound
-	}
-
-	var inTheMonthIndexRange: Range<Int> {
-		let lowerBound = outOfTheMonthIndexRangeLeft.upperBound
-		let upperBound = lowerBound + month.numberOfDays
-		return lowerBound..<upperBound
-	}
-
-	var outOfTheMonthIndexRangeRight: Range<Int> {
-		let lowerBound = inTheMonthIndexRange.upperBound
-		let upperBound = Int.max
-		return lowerBound..<upperBound
-	}
-}
-
-extension Month {
-	public var whiteDaysBeforeFirstDayOfTheMonth: Int {
-		return firstDayOfTheMonthDay.weekday.advanced(by: -1)
-	}
-
-	public var whiteDaysAfterEndDayOfTheMonth: Int {
-		return numberOfWeekdays - lastDayOfTheMonthDay.weekday
-	}
-}
