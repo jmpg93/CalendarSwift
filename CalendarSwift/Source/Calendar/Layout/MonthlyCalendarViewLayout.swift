@@ -23,7 +23,7 @@ public class MonthlyCalendarViewLayout: CalendarViewLayout {
 		return .vertical
 	}
 
-	public 	var monthLayout: MonthViewLayout {
+	public var monthLayout: MonthViewLayout {
 		return MonthlyMonthViewLayout()
 	}
 

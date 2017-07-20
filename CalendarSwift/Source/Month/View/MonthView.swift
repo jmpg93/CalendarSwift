@@ -65,12 +65,6 @@ extension MonthView: UICollectionViewDataSource {
 	}
 }
 
-// MARK: UICollectionViewDelegate methods
-
-extension MonthView: UICollectionViewDelegate {
-
-}
-
 // MARK: UICollectionViewDelegateFlowLayout methods
 
 extension MonthView: UICollectionViewDelegateFlowDirection {

@@ -9,18 +9,27 @@
 import Foundation
 
 open class CalendarView: UIView {
+	fileprivate var stackView: UIStackView!
+	fileprivate var headerView: CalendarHeaderView!
 	fileprivate var collectionView: FlowDirectionableCollectionView!
 	fileprivate var viewModel: CalendarViewModel!
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
 		collectionView = FlowDirectionableCollectionView(frame: frame)
+		stackView = UIStackView(frame: frame)
+		headerView = CalendarHeaderView(frame: frame)
+
 		setUpCollectionView()
+		setUpStackView()
 	}
 
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		collectionView = FlowDirectionableCollectionView(coder: aDecoder)
+		collectionView = FlowDirectionableCollectionView(coder: aDecoder)!
+		stackView = UIStackView(coder: aDecoder)
+		headerView = CalendarHeaderView(coder: aDecoder)!
+
 		setUpCollectionView()
 	}
 }
@@ -29,6 +38,8 @@ open class CalendarView: UIView {
 
 extension CalendarView {
 	open func load(with viewModel: CalendarViewModel) {
+		self.headerView.load(with: viewModel.veryShortWeekdaySymbols)
+
 		self.viewModel = viewModel
 
 		collectionView.flowDelegate = self
@@ -41,8 +52,22 @@ extension CalendarView {
 // MARK: Private methods
 
 fileprivate extension CalendarView {
+	func setUpStackView() {
+		stackView.constraintToBounds(of: self)
+		stackView.alignment = .fill
+		stackView.axis = .vertical
+		stackView.distribution = .fill
+
+		headerView.translatesAutoresizingMaskIntoConstraints = false
+		collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+		headerView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+
+		stackView.addArrangedSubview(headerView)
+		stackView.addArrangedSubview(collectionView)
+	}
+
 	func setUpCollectionView() {
-		collectionView.constraintToBounds(of: self)
 		collectionView.register(MonthView.self)
 	}
 }

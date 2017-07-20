@@ -25,6 +25,14 @@ public class CalendarViewModel  {
 	public convenience init(year: Year, layout: CalendarViewLayout) {
 		self.init(months: year.months, layout: layout)
 	}
+
+	var weekdaySymbols: [String] {
+		return months.first?.weekdaySymbols ?? []
+	}
+
+	var veryShortWeekdaySymbols: [String] {
+		return months.first?.veryShorWeekdaySymbols ?? []
+	}
 }
 
 
@@ -43,6 +51,10 @@ extension CalendarViewModel {
 // MARK: Layout method
 
 extension CalendarViewModel {
+	var headerHeigt: CGFloat {
+		return 10
+	}
+	
 	var minimumLineSpacing: CGFloat {
 		return layout.minimumLineSpacing
 	}

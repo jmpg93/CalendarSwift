@@ -19,4 +19,8 @@ public struct DayViewModel: DayViewModelProtocol {
 	public var dayValue: String {
 		return String(day.day)
 	}
+
+	public var veryShortSymbol: String {
+		return day.veryShortSymbol
+	}
 }

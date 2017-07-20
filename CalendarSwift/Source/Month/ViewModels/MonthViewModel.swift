@@ -19,28 +19,36 @@ public class MonthViewModel {
 		self.layout = layout
 	}
 
-	var symbol: String {
+	public var symbol: String {
 		return month.symbol
 	}
 
-	var numberOfWeeks: Int {
+	public var numberOfWeeks: Int {
 		return month.numberOfWeeks
 	}
 
-	var numberOfDays: Int {
+	 public var numberOfDays: Int {
 		return month.numberOfDays
 	}
 
-	var numberOfWeekdays: Int {
+	public var numberOfWeekdays: Int {
 		return month.numberOfWeekdays
 	}
 
-	var whiteDaysBeforeFirstDayOfTheMonth: Int {
+	public var whiteDaysBeforeFirstDayOfTheMonth: Int {
 		return month.firstDayOfTheMonthDay.weekday.advanced(by: -1)
 	}
 
 	public var whiteDaysAfterEndDayOfTheMonth: Int {
 		return month.numberOfWeekdays - month.lastDayOfTheMonthDay.weekday
+	}
+
+	public var weekdaySymbols: [String] {
+		return month.weekdaySymbols
+	}
+
+	public var veryShortWeekdaySymbols: [String] {
+		return month.veryShorWeekdaySymbols
 	}
 }
 
