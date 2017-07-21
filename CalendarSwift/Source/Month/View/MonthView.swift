@@ -9,18 +9,18 @@
 import Foundation
 
 open class MonthView: UICollectionViewCell {
-	fileprivate var collectionView: FlowDirectionableCollectionView!
+	fileprivate var collectionView: UICollectionView!
 	fileprivate var viewModel: MonthViewModel!
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-		collectionView = FlowDirectionableCollectionView(frame: frame)
+		collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
 		setUpCollectionView()
 	}
 
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		collectionView = FlowDirectionableCollectionView(coder: aDecoder)
+		collectionView = UICollectionView(coder: aDecoder)
 		setUpCollectionView()
 	}
 }
@@ -30,10 +30,11 @@ open class MonthView: UICollectionViewCell {
 extension MonthView {
 	open func load(with viewModel: MonthViewModel) {
 		self.viewModel = viewModel
+		self.viewModel.view = self
 
-		self.collectionView.flowDelegate = self
+		self.collectionView.delegate = self
 		self.collectionView.dataSource = self
-
+	
 		self.collectionView.reloadData()
 	}
 }
@@ -51,6 +52,10 @@ private extension MonthView {
 // MARK: UICollectionDataSource methods
 
 extension MonthView: UICollectionViewDataSource {
+	open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return viewModel.numberOfViewDays
+	}
+	
 	open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeue(cell: DayView.self, at: indexPath)
 
@@ -59,32 +64,10 @@ extension MonthView: UICollectionViewDataSource {
 		
 		return cell
 	}
-
-	open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return viewModel.numberOfViewDays
-	}
 }
 
-// MARK: UICollectionViewDelegateFlowLayout methods
+// MARK: UICollectionViewDelegate methods
 
-extension MonthView: UICollectionViewDelegateFlowDirection {
-	var scrollDirection: UICollectionViewScrollDirection {
-		return viewModel.scrollDirection
-	}
+extension MonthView: UICollectionViewDelegate {
 
-	public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return viewModel.minimumLineSpacing
-	}
-
-	public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-		return viewModel.minimumInteritemSpacing
-	}
-
-	public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return viewModel.sizeForItem(at: indexPath, in: collectionView.bounds)
-	}
-
-	public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-		return viewModel.inset(in: collectionView.bounds)
-	}
 }

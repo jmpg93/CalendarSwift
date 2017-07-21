@@ -9,14 +9,18 @@
 import Foundation
 
 open class CalendarView: UIView {
+	fileprivate enum Constants {
+		static var headerHeight: CGFloat = 44
+	}
+
 	fileprivate var stackView: UIStackView!
 	fileprivate var headerView: CalendarHeaderView!
-	fileprivate var collectionView: FlowDirectionableCollectionView!
+	fileprivate var collectionView: UICollectionView!
 	fileprivate var viewModel: CalendarViewModel!
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-		collectionView = FlowDirectionableCollectionView(frame: frame)
+		collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewLayout())
 		stackView = UIStackView(frame: frame)
 		headerView = CalendarHeaderView(frame: frame)
 
@@ -26,7 +30,7 @@ open class CalendarView: UIView {
 
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		collectionView = FlowDirectionableCollectionView(coder: aDecoder)!
+		collectionView = UICollectionView(coder: aDecoder)!
 		stackView = UIStackView(coder: aDecoder)
 		headerView = CalendarHeaderView(coder: aDecoder)!
 
@@ -42,9 +46,13 @@ extension CalendarView {
 
 		self.viewModel = viewModel
 
-		collectionView.flowDelegate = self
+		collectionView.delegate = self
 		collectionView.dataSource = self
 	
+		collectionView.reloadData()
+	}
+
+	open func reloadData() {
 		collectionView.reloadData()
 	}
 }
@@ -61,28 +69,24 @@ fileprivate extension CalendarView {
 		headerView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 
-		headerView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+		headerView.heightAnchor.constraint(equalToConstant: Constants.headerHeight).isActive = true
 
 		stackView.addArrangedSubview(headerView)
 		stackView.addArrangedSubview(collectionView)
 	}
 
 	func setUpCollectionView() {
+		collectionView.showsVerticalScrollIndicator = false
+		collectionView.showsHorizontalScrollIndicator = false
 		collectionView.register(MonthView.self)
 	}
-}
-
-// MARK: UICollectionViewDelegate methods
-
-extension CalendarView: UICollectionViewDelegate {
-
 }
 
 // MARK: UICollectionViewDataSource methods
 
 extension CalendarView: UICollectionViewDataSource {
 	open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return viewModel.numberOfMonths()
+		return viewModel.numberOfMonths
 	}
 
 	public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,26 +99,9 @@ extension CalendarView: UICollectionViewDataSource {
 	}
 }
 
-// MARK: UICollectionViewDelegateFlowLayout methods
 
-extension CalendarView: UICollectionViewDelegateFlowDirection {
-	var scrollDirection: UICollectionViewScrollDirection {
-		return viewModel.scrollDirection
-	}
+// MARK: UICollectionViewDelegate methods
 
-	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return viewModel.minimumLineSpacing
-	}
+extension CalendarView: UICollectionViewDelegate {
 
-	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-		return viewModel.minimumInteritemSpacing
-	}
-
-	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return viewModel.sizeForItem(at: indexPath, in: collectionView.bounds)
-	}
-
-	open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-		return viewModel.inset(in: collectionView.bounds)
-	}
 }

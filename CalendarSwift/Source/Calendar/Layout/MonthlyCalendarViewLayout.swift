@@ -8,31 +8,41 @@
 
 import UIKit
 
-public class MonthlyCalendarViewLayout: CalendarViewLayout {
-	public init() { }
+public class MonthlyCalendarViewLayout: UICollectionViewFlowLayout {
+	fileprivate let viewModel: CalendarViewModel
 
-	public var minimumInteritemSpacing: CGFloat {
-		return 0
+	public init(viewModel: CalendarViewModel) {
+		self.viewModel = viewModel
+		super.init()
+		setUp()
 	}
 
-	public var minimumLineSpacing: CGFloat {
-		return 0
+	required public init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
 	}
 
-	public var scrollDirection: UICollectionViewScrollDirection {
-		return .vertical
+	func setUp() {
+		minimumLineSpacing = 0
+		minimumLineSpacing = 0
+		scrollDirection = .vertical
+		sectionInset = .zero
 	}
 
-	public var monthLayout: MonthViewLayout {
-		return MonthlyMonthViewLayout()
-	}
+	public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+		guard let collectionView = collectionView else {
+			return nil
+		}
 
-	public func inset(in bounds: CGRect, using model: CalendarViewModel) -> UIEdgeInsets {
-		return .zero
-	}
+		let attribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+		attribute.size = itemSize(at: indexPath, in: collectionView.bounds, using: viewModel)
 
-	public func itemSize(at indexPath: IndexPath, in bounds: CGRect, using model: CalendarViewModel) -> CGSize {
-		let month = model.monthViewModel(at: indexPath)
+		return attribute
+	}
+}
+
+fileprivate extension MonthlyCalendarViewLayout {
+	func itemSize(at indexPath: IndexPath, in bounds: CGRect, using viewModel: CalendarViewModel) -> CGSize {
+		let month = viewModel.monthViewModel(at: indexPath)
 
 		let days = month.numberOfViewDays
 		let weeks = days / month.numberOfWeekdays

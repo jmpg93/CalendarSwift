@@ -8,69 +8,51 @@
 
 import UIKit
 
-public class MonthlyMonthViewLayout: MonthViewLayout {
-	public init() { }
+public class MonthlyMonthViewLayout: UICollectionViewFlowLayout {
+	fileprivate let viewModel: MonthViewModel
+
+	public init(viewModel: MonthViewModel) {
+		self.viewModel = viewModel
+		super.init()
+		setUp()
+	}
 	
-	public var minimumInteritemSpacing: CGFloat {
-		return 0
+	required public init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
 	}
 
-	public var minimumLineSpacing: CGFloat {
-		return 0
+	func setUp() {
+		minimumLineSpacing = 0
+		minimumLineSpacing = 0
+		scrollDirection = .vertical
+		sectionInset = .zero
 	}
 
-	public var scrollDirection: UICollectionViewScrollDirection {
-		return .vertical
-	}
-
-	public func dayViewModel(at indexPath: IndexPath, in viewModel: MonthViewModel) -> DayViewModelProtocol {
-		switch indexPath.item {
-		case outOfTheMonthIndexRangeLeft(in: viewModel):
-			return EmptyDayViewModel()
-		case outOfTheMonthIndexRangeRight(in: viewModel):
-			return EmptyDayViewModel()
-		case inTheMonthIndexRange(in: viewModel):
-			let relativeIndex = IndexPath(item: indexPath.item - outOfTheMonthIndexRangeLeft(in: viewModel).upperBound,
-			                    			          section: 0)
-			return DayViewModel(day: viewModel.day(at: relativeIndex))
-		default:
-			fatalError("Index out of scope")
+	public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+		guard let collectionView = collectionView else {
+			return nil
 		}
-	}
 
-	public func numberOfDays(in viewModel: MonthViewModel) -> Int {
-		return viewModel.numberOfDays
-		+ viewModel.whiteDaysAfterEndDayOfTheMonth
-		+ viewModel.whiteDaysBeforeFirstDayOfTheMonth
-	}
+		let attribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+		attribute.size = itemSize(at: indexPath, in: collectionView.bounds, using: viewModel)
 
-	public func inset(in bounds: CGRect, using viewModel: MonthViewModel) -> UIEdgeInsets {
-		return .zero
-	}
-
-	public func itemSize(at indexPath: IndexPath, in bounds: CGRect, using viewModel: MonthViewModel) -> CGSize {
-		let itemsPerRow = CGFloat(viewModel.numberOfWeekdays)
-		let width = bounds.width / itemsPerRow
-		return CGSize(width: width, height: width)
+		return attribute
 	}
 }
 
-extension MonthlyMonthViewLayout {
-	func outOfTheMonthIndexRangeLeft(in viewModel: MonthViewModel) -> Range<Int> {
-		let lowerBound = Int.min
-		let upperBound = viewModel.whiteDaysBeforeFirstDayOfTheMonth
-		return lowerBound..<upperBound
-	}
-
-	func inTheMonthIndexRange(in viewModel: MonthViewModel) -> Range<Int> {
-		let lowerBound = outOfTheMonthIndexRangeLeft(in: viewModel).upperBound
-		let upperBound = lowerBound + viewModel.numberOfDays
-		return lowerBound..<upperBound
-	}
-
-	func outOfTheMonthIndexRangeRight(in viewModel: MonthViewModel) -> Range<Int> {
-		let lowerBound = inTheMonthIndexRange(in: viewModel).upperBound
-		let upperBound = Int.max
-		return lowerBound..<upperBound
+fileprivate extension MonthlyMonthViewLayout {
+	func itemSize(at indexPath: IndexPath, in bounds: CGRect, using viewModel: MonthViewModel) -> CGSize {
+		switch indexPath.item {
+		case viewModel.outOfTheMonthIndexRangeLeft:
+			return .zero
+		case viewModel.outOfTheMonthIndexRangeRight:
+			return .zero
+		case viewModel.inTheMonthIndexRange:
+			let itemsPerRow = CGFloat(viewModel.numberOfWeekdays)
+			let width = bounds.width / itemsPerRow
+			return CGSize(width: width, height: width)
+		default:
+			fatalError("Index out of scope")
+		}
 	}
 }

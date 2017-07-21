@@ -10,13 +10,13 @@ import Foundation
 import TimeSwift
 
 public class MonthViewModel {
+	weak var view: MonthView?
 	fileprivate let month: Month
-	fileprivate let layout: MonthViewLayout
+	fileprivate var mode: Mode
 
-	//TODO: Change
-	public init(month: Month, layout: MonthViewLayout = MonthlyMonthViewLayout()) {
+	public init(month: Month, mode: Mode) {
 		self.month = month
-		self.layout = layout
+		self.mode = mode
 	}
 
 	public var symbol: String {
@@ -27,7 +27,7 @@ public class MonthViewModel {
 		return month.numberOfWeeks
 	}
 
-	 public var numberOfDays: Int {
+	public var numberOfDays: Int {
 		return month.numberOfDays
 	}
 
@@ -50,6 +50,24 @@ public class MonthViewModel {
 	public var veryShortWeekdaySymbols: [String] {
 		return month.veryShorWeekdaySymbols
 	}
+
+	var outOfTheMonthIndexRangeLeft: Range<Int> {
+		let lowerBound = Int.min
+		let upperBound = whiteDaysBeforeFirstDayOfTheMonth
+		return lowerBound..<upperBound
+	}
+
+	var inTheMonthIndexRange: Range<Int> {
+		let lowerBound = outOfTheMonthIndexRangeLeft.upperBound
+		let upperBound = lowerBound + numberOfDays
+		return lowerBound..<upperBound
+	}
+
+	var outOfTheMonthIndexRangeRight: Range<Int> {
+		let lowerBound = inTheMonthIndexRange.upperBound
+		let upperBound = Int.max
+		return lowerBound..<upperBound
+	}
 }
 
 // MARK: Datasource methods
@@ -60,36 +78,25 @@ extension MonthViewModel {
 	}
 
 	public func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {
-		return layout.dayViewModel(at: indexPath, in: self)
+		let relativeIndex = indexPath.item - whiteDaysAfterEndDayOfTheMonth
+		return DayViewModel(day: month.days[relativeIndex])
 	}
 
 	public var numberOfViewDays: Int {
-		return layout.numberOfDays(in: self)
+		return numberOfDays + whiteDaysAfterEndDayOfTheMonth + whiteDaysBeforeFirstDayOfTheMonth
 	}
 }
 
 // MARK: Layout methods
 
 extension MonthViewModel {
-	var minimumLineSpacing: CGFloat {
-		return 0
-	}
+	public var collectionViewLayout: UICollectionViewLayout {
+		switch mode {
+		case .monthly:
+			return MonthlyMonthViewLayout(viewModel: self)
+		case .weekly:
+			return MonthlyMonthViewLayout(viewModel: self)
+		}
 
-	var minimumInteritemSpacing: CGFloat {
-		return 0
-	}
-
-	var scrollDirection: UICollectionViewScrollDirection {
-		return layout.scrollDirection
-	}
-
-	func sizeForItem(at indexPath: IndexPath, in bounds: CGRect) -> CGSize {
-		return layout.itemSize(at: indexPath, in: bounds, using: self)
-	}
-
-	func inset(in bounds: CGRect) -> UIEdgeInsets {
-		return layout.inset(in: bounds, using: self)
 	}
 }
-
-// MARK: Private methods
