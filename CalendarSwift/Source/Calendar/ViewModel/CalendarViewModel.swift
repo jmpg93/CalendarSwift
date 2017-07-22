@@ -14,6 +14,8 @@ public class CalendarViewModel  {
 	fileprivate var years: [Year] = []
 	fileprivate var mode: Mode
 
+	fileprivate let timeLoader = TimeLoader()
+	
 	public init(years: [Year], mode: Mode) {
 		self.years = years
 		self.mode = mode
@@ -46,12 +48,20 @@ public class CalendarViewModel  {
 
 // MARK: DataSource method
 
-extension CalendarViewModel {
-	public var numberOfMonths: Int {
+public extension CalendarViewModel {
+	var numberOfMonths: Int {
 		return months.count
 	}
 
-	public func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
+	func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
 		return MonthViewModel(month: months[indexPath.item], mode: mode)
+	}
+}
+
+// MARK: Delegate methods
+
+public extension CalendarViewModel {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		timeLoader.scrollViewDidScroll(scrollView: scrollView, currentYears: years)
 	}
 }

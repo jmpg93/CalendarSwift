@@ -107,9 +107,16 @@ extension CalendarView: UICollectionViewDataSource {
 	}
 }
 
-
 // MARK: UICollectionViewDelegate methods
 
 extension CalendarView: UICollectionViewDelegate {
 
+}
+
+// MARK: UIScrollViewDelegate methods
+
+extension CalendarView {
+	public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		viewModel.scrollViewDidScroll(scrollView)
+	}
 }
