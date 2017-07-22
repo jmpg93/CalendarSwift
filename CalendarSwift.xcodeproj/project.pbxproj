@@ -15,6 +15,7 @@
 		181AB9761F194E1700D56BFE /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181AB9751F194E1700D56BFE /* DayViewModel.swift */; };
 		181AB9791F194E8B00D56BFE /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181AB9781F194E8B00D56BFE /* MonthView.swift */; };
 		182474811F239E8D00622803 /* CGFloat+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182474801F239E8D00622803 /* CGFloat+Utils.swift */; };
+		182474831F23A93600622803 /* TimeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182474821F23A93600622803 /* TimeLoader.swift */; };
 		18A3CCDB1F1A12320060BDC5 /* UICollectionView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A3CCDA1F1A12320060BDC5 /* UICollectionView+Utils.swift */; };
 		18C96F151F1A1D50009F22FD /* EmptyDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C96F141F1A1D50009F22FD /* EmptyDayViewModel.swift */; };
 		18C96F171F1A1D59009F22FD /* DayViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C96F161F1A1D59009F22FD /* DayViewModelProtocol.swift */; };
@@ -98,6 +99,7 @@
 		181AB9751F194E1700D56BFE /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
 		181AB9781F194E8B00D56BFE /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		182474801F239E8D00622803 /* CGFloat+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CGFloat+Utils.swift"; path = "Helpers/CGFloat+Utils.swift"; sourceTree = "<group>"; };
+		182474821F23A93600622803 /* TimeLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLoader.swift; sourceTree = "<group>"; };
 		18A3CCDA1F1A12320060BDC5 /* UICollectionView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Utils.swift"; path = "Helpers/UICollectionView+Utils.swift"; sourceTree = "<group>"; };
 		18C96F141F1A1D50009F22FD /* EmptyDayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDayViewModel.swift; sourceTree = "<group>"; };
 		18C96F161F1A1D59009F22FD /* DayViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				6CBDCC1D1F1A53EC00EB610E /* CalendarViewModel.swift */,
+				182474821F23A93600622803 /* TimeLoader.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				18CAB5D41F1E8B800063E33F /* MonthlyCalendarViewLayout.swift in Sources */,
 				18F63DFC1F1FE17D004B186E /* MonthHeaderView.swift in Sources */,
 				182474811F239E8D00622803 /* CGFloat+Utils.swift in Sources */,
+				182474831F23A93600622803 /* TimeLoader.swift in Sources */,
 				1810FDD41F1A0E8C007C8EEB /* UINib+Utils.swift in Sources */,
 				181AB9721F194D7700D56BFE /* DayView.swift in Sources */,
 				18CAB5E21F1EABF80063E33F /* FlowDirectionableCollectionView.swift in Sources */,

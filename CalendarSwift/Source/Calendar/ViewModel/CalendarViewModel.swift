@@ -13,9 +13,6 @@ public class CalendarViewModel  {
 	weak var view: CalendarView?
 	fileprivate var years: [Year] = []
 	fileprivate var mode: Mode
-	fileprivate var months: [Month] {
-		return years.flatMap({ $0.months })
-	}
 
 	public init(years: [Year], mode: Mode) {
 		self.years = years
@@ -26,19 +23,23 @@ public class CalendarViewModel  {
 		self.init(years: [year], mode: mode)
 	}
 
-	var weekdaySymbols: [String] {
+	fileprivate var months: [Month] {
+		return years.flatMap({ $0.months })
+	}
+
+	public var weekdaySymbols: [String] {
 		return months.first?.weekdaySymbols ?? []
 	}
 
-	var veryShortWeekdaySymbols: [String] {
+	public var veryShortWeekdaySymbols: [String] {
 		return months.first?.veryShorWeekdaySymbols ?? []
 	}
 
-	var layout: UICollectionViewLayout {
+	public var layout: UICollectionViewLayout {
 		return mode.calendarLayout(viewModel: self)
 	}
 
-	func set(mode: Mode) {
+	public func set(mode: Mode) {
 		self.mode = mode
 	}
 }
@@ -46,11 +47,11 @@ public class CalendarViewModel  {
 // MARK: DataSource method
 
 extension CalendarViewModel {
-	var numberOfMonths: Int {
+	public var numberOfMonths: Int {
 		return months.count
 	}
 
-	func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
+	public func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
 		return MonthViewModel(month: months[indexPath.item], mode: mode)
 	}
 }

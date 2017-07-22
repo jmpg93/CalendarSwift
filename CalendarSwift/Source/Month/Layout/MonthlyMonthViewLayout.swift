@@ -25,7 +25,7 @@ public class MonthlyMonthViewLayout: MonthViewLayout {
 		let itemsPerRow = CGFloat(viewModel.numberOfWeekdays)
 		let width = (bounds.width / itemsPerRow)
 
-		itemSize = CGSize(width: width, height: width)
+		itemSize = CGSize(width: width, height: width).floored
 	}
 
 	override public var numberOfViewDays: Int {

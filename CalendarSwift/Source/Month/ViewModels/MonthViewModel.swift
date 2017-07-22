@@ -19,45 +19,45 @@ public class MonthViewModel {
 		self.mode = mode
 	}
 
-	public var symbol: String {
-		return month.symbol
-	}
+	public lazy var symbol: String = {
+		return self.month.symbol
+	}()
 
-	public var shortSymbol: String {
-		return month.shortSymbol
-	}
+	public lazy var shortSymbol: String = {
+		return self.month.shortSymbol
+	}()
 
-	public var numberOfWeeks: Int {
-		return month.numberOfWeeks
-	}
+	public lazy var numberOfWeeks: Int = {
+		return self.month.numberOfWeeks
+	}()
 
-	public var numberOfDays: Int {
-		return month.numberOfDays
-	}
+	public lazy var numberOfDays: Int = {
+		return self.month.numberOfDays
+	}()
 
-	public var numberOfWeekdays: Int {
-		return month.numberOfWeekdays
-	}
+	public lazy var numberOfWeekdays: Int = {
+		return self.month.numberOfWeekdays
+	}()
 
-	public var firstDayOfTheMonthWeekday: Int {
-		return month.firstDayOfTheMonthDay.weekday
-	}
+	public lazy var firstDayOfTheMonthWeekday: Int = {
+		return self.month.firstDayOfTheMonthDay.weekday
+	}()
 
-	public var whiteDaysBeforeFirstDayOfTheMonth: Int {
-		return month.firstDayOfTheMonthDay.weekday.advanced(by: -1)
-	}
+	public lazy var whiteDaysBeforeFirstDayOfTheMonth: Int = {
+		return self.month.firstDayOfTheMonthDay.weekday.advanced(by: -1)
+	}()
 
-	public var whiteDaysAfterEndDayOfTheMonth: Int {
-		return month.numberOfWeekdays - month.lastDayOfTheMonthDay.weekday
-	}
+	public lazy var whiteDaysAfterEndDayOfTheMonth: Int = {
+		return self.month.numberOfWeekdays - self.month.lastDayOfTheMonthDay.weekday
+	}()
 
-	public var weekdaySymbols: [String] {
-		return month.weekdaySymbols
-	}
+	public lazy var weekdaySymbols: [String] = {
+		return self.month.weekdaySymbols
+	}()
 
-	public var veryShortWeekdaySymbols: [String] {
-		return month.veryShorWeekdaySymbols
-	}
+	public lazy var veryShortWeekdaySymbols: [String] = {
+		return self.month.veryShorWeekdaySymbols
+	}()
 
 	public var isHeaderEnabled: Bool {
 		return mode == .monthly
