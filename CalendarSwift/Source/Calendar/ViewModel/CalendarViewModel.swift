@@ -49,12 +49,17 @@ public class CalendarViewModel  {
 // MARK: DataSource method
 
 public extension CalendarViewModel {
-	var numberOfMonths: Int {
-		return months.count
+	func numberOfYears() -> Int {
+		return years.count
+	}
+
+	func numberOfMonths(in year: Int) -> Int {
+		return years[year].months.count
 	}
 
 	func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
-		return MonthViewModel(month: months[indexPath.item], mode: mode)
+		let month = years[indexPath.section].months[indexPath.item]
+		return MonthViewModel(month: month, mode: mode)
 	}
 }
 
@@ -62,6 +67,13 @@ public extension CalendarViewModel {
 
 public extension CalendarViewModel {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		timeLoader.scrollViewDidScroll(scrollView: scrollView, currentYears: years)
+		let loaderResult = timeLoader.scrollViewDidScroll(scrollView: scrollView, currentYears: years)
+		switch loaderResult {
+		case .none:
+			return
+		case .inserted(let newYears, let insertIndexPaths, let sections):
+			self.years += newYears
+			self.view?.insertMonths(indexPaths: insertIndexPaths, sections: sections)
+		}
 	}
 }

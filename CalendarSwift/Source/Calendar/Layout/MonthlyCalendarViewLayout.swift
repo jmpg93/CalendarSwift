@@ -20,8 +20,12 @@ public class MonthlyCalendarViewLayout: CalendarViewLayout {
 		estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
 	}
 
-	public override var numberOfMonths: Int {
-		return viewModel.numberOfMonths
+	public func numberOfYears() -> Int {
+		return viewModel.numberOfYears()
+	}
+
+	public func numberOfMonth(in year: Int) -> Int {
+		return viewModel.numberOfMonths(in: year)
 	}
 
 	public override func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {

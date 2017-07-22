@@ -41,6 +41,20 @@ open class CalendarView: UIView {
 // MARK: Public methods
 
 extension CalendarView {
+	open func insertMonths(indexPaths: [IndexPath]? = nil, sections: IndexSet? = nil) {
+		collectionView.performBatchUpdates({
+			if let sections = sections {
+				self.collectionView.insertSections(sections)
+			}
+
+			if let indexPaths = indexPaths {
+				self.collectionView.insertItems(at: indexPaths)
+			}
+
+			self.collectionView.collectionViewLayout.invalidateLayout()
+		}, completion: nil)
+	}
+
 	open func set(mode: Mode, animated: Bool = true) {
 		viewModel.set(mode: mode)
 		collectionView.setCollectionViewLayout(viewModel.layout, animated: animated)
@@ -56,10 +70,6 @@ extension CalendarView {
 		collectionView.delegate = self
 		collectionView.dataSource = self
 	
-		collectionView.reloadData()
-	}
-
-	open func reloadData() {
 		collectionView.reloadData()
 	}
 }
@@ -86,6 +96,7 @@ fileprivate extension CalendarView {
 		collectionView.showsVerticalScrollIndicator = false
 		collectionView.showsHorizontalScrollIndicator = false
 		collectionView.register(MonthView.self)
+		collectionView.register(HeaderView.self)
 		collectionView.backgroundColor = .white
 	}
 }
@@ -93,8 +104,12 @@ fileprivate extension CalendarView {
 // MARK: UICollectionViewDataSource methods
 
 extension CalendarView: UICollectionViewDataSource {
+	open func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return viewModel.numberOfYears()
+	}
+
 	open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return viewModel.numberOfMonths
+		return viewModel.numberOfMonths(in: section)
 	}
 
 	public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -104,6 +119,12 @@ extension CalendarView: UICollectionViewDataSource {
 		cell.load(with: monthViewModel, animated: false)
 
 		return cell
+	}
+
+	public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+		let view = collectionView.dequeue(cell: MonthView.self, at: indexPath)
+		view.backgroundColor = .red
+		return view
 	}
 }
 

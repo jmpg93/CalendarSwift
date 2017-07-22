@@ -11,24 +11,50 @@ import UIKit
 import TimeSwift
 
 public class TimeLoader {
-	fileprivate let maximunDeltaToEnd: CGFloat = 1000.0
+	public enum Result {
+		case inserted(years: [Year], indexPaths: [IndexPath], sections: IndexSet)
+		case none
+	}
 
-	func scrollViewDidScroll(scrollView: UIScrollView, currentYears years: [Year]) -> [Year] {
-		let contentOffsetFromBottom = (scrollView.contentOffset.y + scrollView.bounds.size.height)
+	fileprivate let maximunDeltaToEnd: CGFloat = 1000.0
+	fileprivate var isUpdating = false
+
+	func scrollViewDidScroll(scrollView: UIScrollView, currentYears: [Year]) -> Result {
+		defer { isUpdating = false }
+
+		let contentOffsetFromBottom = scrollView.contentOffset.y + scrollView.bounds.size.height
 		let scrollToEndDelta = scrollView.contentSize.height - contentOffsetFromBottom
 
-		guard scrollToEndDelta >= maximunDeltaToEnd else {
-			return []
+		guard isUpdating == false else {
+			return .none
 		}
 
-		guard let lastContainedYear = years.last else {
-			return [Year(date: Date())]
+		guard scrollToEndDelta <= maximunDeltaToEnd else {
+			return .none
 		}
 
-		guard !years.contains(lastContainedYear.next) else {
-			return []
+		guard let lastContainedYear = currentYears.last else {
+			return .none
 		}
 
-		return [lastContainedYear]
+		guard !currentYears.contains(lastContainedYear.next) else {
+			return .none
+		}
+
+		isUpdating = true
+
+		let newYears = [lastContainedYear]
+		let years = currentYears + newYears
+		var indexPaths: [IndexPath] = []
+		
+		for section in years.indices where section > currentYears.indices.upperBound {
+			for item in years[section].months.indices {
+				indexPaths += [IndexPath(item: item, section: section)]
+			}
+		}
+
+		let sections = IndexSet(integersIn: currentYears.indices.upperBound..<years.indices.upperBound)
+
+		return .inserted(years: newYears, indexPaths: indexPaths, sections: sections)
 	}
 }

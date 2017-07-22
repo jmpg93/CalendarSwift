@@ -21,9 +21,6 @@ class ViewController: UIViewController {
 		let viewModel = CalendarViewModel(year: year, mode: .monthly)
 		let view = CalendarView(frame: self.view.bounds)
 
-//		let viewModel = MonthViewModel(month: .current, mode: .monthly)
-//		let view = MonthView(frame: self.view.bounds)
-
 		view.load(with: viewModel)
 
 		view.constraintToBounds(of: self.view)
