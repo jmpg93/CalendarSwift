@@ -8,14 +8,35 @@
 
 import UIKit
 
-public protocol MonthViewLayout {
-	var minimumInteritemSpacing: CGFloat { get }
-	var minimumLineSpacing: CGFloat { get }
-	var scrollDirection: UICollectionViewScrollDirection { get }
+public class MonthViewLayout: UICollectionViewFlowLayout {
+	public let viewModel: MonthViewModel
+	private var lastBounds: CGRect = .zero
 
-	func numberOfDays(in month: MonthViewModel) -> Int
-	func dayViewModel(at indexPath: IndexPath, in viewModel: MonthViewModel) -> DayViewModelProtocol
-	
-	func itemSize(at indexPath: IndexPath, in bounds: CGRect, using viewModel: MonthViewModel) -> CGSize
-	func inset(in bounds: CGRect, using viewModel: MonthViewModel) -> UIEdgeInsets
+	public init(viewModel: MonthViewModel) {
+		self.viewModel = viewModel
+		super.init()
+		setUp()
+	}
+
+	public required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+
+	public func setUp() {
+		fatalError("Override this method")
+	}
+
+	public func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {
+		fatalError("Override this method")
+	}
+
+	public var numberOfViewDays: Int {
+		fatalError("Override this method")
+	}
+
+	public override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+		let shouldInvalidateLayout = lastBounds.width != newBounds.width
+		lastBounds = newBounds
+		return shouldInvalidateLayout
+	}
 }

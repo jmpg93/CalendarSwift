@@ -8,49 +8,46 @@
 
 import UIKit
 
-public class MonthlyMonthViewLayout: UICollectionViewFlowLayout {
-	fileprivate let viewModel: MonthViewModel
-
-	public init(viewModel: MonthViewModel) {
-		self.viewModel = viewModel
-		super.init()
-		setUp()
-	}
-	
-	required public init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-
-	func setUp() {
+public class MonthlyMonthViewLayout: MonthViewLayout {
+	override public func setUp() {
 		minimumLineSpacing = 0
-		minimumLineSpacing = 0
+		minimumInteritemSpacing = 0
 		scrollDirection = .vertical
 		sectionInset = .zero
 	}
 
-	public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-		guard let collectionView = collectionView else {
-			return nil
-		}
+	public override func prepare() {
+		super.prepare()
+		guard let collectionView = collectionView else { return }
 
-		let attribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-		attribute.size = itemSize(at: indexPath, in: collectionView.bounds, using: viewModel)
+		let bounds = collectionView.bounds
 
-		return attribute
+		let itemsPerRow = CGFloat(viewModel.numberOfWeekdays)
+		let width = (bounds.width / itemsPerRow)
+
+		itemSize = CGSize(width: width, height: width)
 	}
-}
 
-fileprivate extension MonthlyMonthViewLayout {
-	func itemSize(at indexPath: IndexPath, in bounds: CGRect, using viewModel: MonthViewModel) -> CGSize {
+	override public var numberOfViewDays: Int {
+		return viewModel.numberOfDays
+			+ viewModel.whiteDaysAfterEndDayOfTheMonth
+			+ viewModel.whiteDaysBeforeFirstDayOfTheMonth
+	}
+	
+	override public func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {
 		switch indexPath.item {
 		case viewModel.outOfTheMonthIndexRangeLeft:
-			return .zero
+			return EmptyDayViewModel()
+			
 		case viewModel.outOfTheMonthIndexRangeRight:
-			return .zero
+			return EmptyDayViewModel()
+
 		case viewModel.inTheMonthIndexRange:
-			let itemsPerRow = CGFloat(viewModel.numberOfWeekdays)
-			let width = bounds.width / itemsPerRow
-			return CGSize(width: width, height: width)
+			let relativeIndex = IndexPath(item: indexPath.item - viewModel.whiteDaysBeforeFirstDayOfTheMonth,
+			                              section: indexPath.section)
+			let day = viewModel.day(at: relativeIndex)
+			return DayViewModel(day: day)
+			
 		default:
 			fatalError("Index out of scope")
 		}

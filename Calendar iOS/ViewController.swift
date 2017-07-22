@@ -11,7 +11,6 @@ import CalendarSwift
 import TimeSwift
 
 class ViewController: UIViewController {
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
@@ -20,11 +19,17 @@ class ViewController: UIViewController {
 
 		let year = Year(date: Date(), in: calendar)
 		let viewModel = CalendarViewModel(year: year, mode: .monthly)
-		
 		let view = CalendarView(frame: self.view.bounds)
+
+//		let viewModel = MonthViewModel(month: .current, mode: .monthly)
+//		let view = MonthView(frame: self.view.bounds)
+
 		view.load(with: viewModel)
 
-
+		DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+			let viewModel = CalendarViewModel(year: year, mode: .monthly)
+			view.set(mode: .weekly)
+		})
 		view.constraintToBounds(of: self.view)
 	}
 }

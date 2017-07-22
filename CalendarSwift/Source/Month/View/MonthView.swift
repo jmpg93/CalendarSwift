@@ -28,13 +28,14 @@ open class MonthView: UICollectionViewCell {
 // MARK: Public methods
 
 extension MonthView {
-	open func load(with viewModel: MonthViewModel) {
+	open func load(with viewModel: MonthViewModel, animated: Bool = true) {
 		self.viewModel = viewModel
 		self.viewModel.view = self
 
 		self.collectionView.delegate = self
 		self.collectionView.dataSource = self
-	
+
+		self.collectionView.setCollectionViewLayout(viewModel.layout, animated: animated)
 		self.collectionView.reloadData()
 	}
 }

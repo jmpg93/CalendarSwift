@@ -14,5 +14,21 @@ public enum Mode {
 }
 
 extension Mode {
+	func monthLayout(viewModel: MonthViewModel) -> MonthViewLayout {
+		switch self {
+		case .monthly:
+			return MonthlyMonthViewLayout(viewModel: viewModel)
+		case .weekly:
+			return WeeklyMonthViewLayout(viewModel: viewModel)
+		}
+	}
 
+	func calendarLayout(viewModel: CalendarViewModel) -> CalendarViewLayout {
+		switch self {
+		case .monthly:
+			return MonthlyCalendarViewLayout(viewModel: viewModel)
+		case .weekly:
+			return WeeklyCalendarViewLayout(viewModel: viewModel)
+		}
+	}
 }

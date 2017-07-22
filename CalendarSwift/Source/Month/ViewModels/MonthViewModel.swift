@@ -68,6 +68,10 @@ public class MonthViewModel {
 		let upperBound = Int.max
 		return lowerBound..<upperBound
 	}
+
+	lazy var layout: MonthViewLayout = {
+		return self.mode.monthLayout(viewModel: self)
+	}()
 }
 
 // MARK: Datasource methods
@@ -78,12 +82,11 @@ extension MonthViewModel {
 	}
 
 	public func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {
-		let relativeIndex = indexPath.item - whiteDaysAfterEndDayOfTheMonth
-		return DayViewModel(day: month.days[relativeIndex])
+		return layout.dayViewModel(at: indexPath)
 	}
 
 	public var numberOfViewDays: Int {
-		return numberOfDays + whiteDaysAfterEndDayOfTheMonth + whiteDaysBeforeFirstDayOfTheMonth
+		return layout.numberOfViewDays
 	}
 }
 
@@ -95,8 +98,7 @@ extension MonthViewModel {
 		case .monthly:
 			return MonthlyMonthViewLayout(viewModel: self)
 		case .weekly:
-			return MonthlyMonthViewLayout(viewModel: self)
+			return WeeklyMonthViewLayout(viewModel: self)
 		}
-
 	}
 }

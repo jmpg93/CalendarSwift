@@ -33,8 +33,15 @@ public class CalendarViewModel  {
 	var veryShortWeekdaySymbols: [String] {
 		return months.first?.veryShorWeekdaySymbols ?? []
 	}
-}
 
+	var layout: UICollectionViewLayout {
+		return mode.calendarLayout(viewModel: self)
+	}
+
+	func set(mode: Mode) {
+		self.mode = mode
+	}
+}
 
 // MARK: DataSource method
 

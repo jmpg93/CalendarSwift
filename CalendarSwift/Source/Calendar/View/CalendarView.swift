@@ -41,11 +41,18 @@ open class CalendarView: UIView {
 // MARK: Public methods
 
 extension CalendarView {
-	open func load(with viewModel: CalendarViewModel) {
+	open func set(mode: Mode, animated: Bool = true) {
+		viewModel.set(mode: mode)
+		collectionView.setCollectionViewLayout(viewModel.layout, animated: animated)
+	}
+
+	open func load(with viewModel: CalendarViewModel, animated: Bool = true) {
 		self.headerView.load(with: viewModel.veryShortWeekdaySymbols)
 
 		self.viewModel = viewModel
+		self.viewModel.view = self
 
+		collectionView.setCollectionViewLayout(viewModel.layout, animated: animated)
 		collectionView.delegate = self
 		collectionView.dataSource = self
 	
@@ -91,9 +98,9 @@ extension CalendarView: UICollectionViewDataSource {
 
 	public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeue(cell: MonthView.self, at: indexPath)
-		
+
 		let monthViewModel = viewModel.monthViewModel(at: indexPath)
-		cell.load(with: monthViewModel)
+		cell.load(with: monthViewModel, animated: false)
 
 		return cell
 	}

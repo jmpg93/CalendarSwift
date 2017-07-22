@@ -8,42 +8,33 @@
 
 import Foundation
 
-public class WeeklyMonthViewLayout: UICollectionViewFlowLayout {
-	fileprivate let viewModel: MonthViewModel
-
-	public init(viewModel: MonthViewModel) {
-		self.viewModel = viewModel
-		super.init()
-		setUp()
-	}
-
-	required public init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-
-	func setUp() {
+public class WeeklyMonthViewLayout: MonthViewLayout {
+	override public func setUp() {
 		minimumLineSpacing = 0
-		minimumLineSpacing = 0
+		minimumInteritemSpacing = 0
 		scrollDirection = .horizontal
 		sectionInset = .zero
 	}
 
-	public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-		guard let collectionView = collectionView else {
-			return nil
-		}
+	public override func prepare() {
+		super.prepare()
+		guard let collectionView = collectionView else { return }
 
-		let attribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-		attribute.size = itemSize(at: indexPath, in: collectionView.bounds, using: viewModel)
+		let bounds = collectionView.bounds
 
-		return attribute
-	}
-}
-
-fileprivate extension WeeklyMonthViewLayout {
-	func itemSize(at indexPath: IndexPath, in bounds: CGRect, using viewModel: MonthViewModel) -> CGSize {
 		let itemsPerRow = CGFloat(viewModel.numberOfWeekdays)
 		let width = bounds.width / itemsPerRow
-		return CGSize(width: width, height: bounds.height)
+
+		itemSize = CGSize(width: width, height: bounds.height)
+	}
+
+
+	public override var numberOfViewDays: Int {
+		return viewModel.numberOfDays
+	}
+
+	public override func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {
+		let day = viewModel.day(at: indexPath)
+		return DayViewModel(day: day)
 	}
 }

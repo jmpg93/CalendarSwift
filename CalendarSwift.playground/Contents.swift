@@ -3,34 +3,11 @@ import CalendarSwift
 import TimeSwift
 import PlaygroundSupport
 
-protocol UICollectionViewDelegateFlowDirection: class {
-	var scrollDirection: UICollectionViewScrollDirection { get }
-}
+let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+let view = MonthView(frame: frame)
+let viewModel = MonthViewModel(month: .current, mode: Mode.monthly)
 
-class DirectionableFlowLayout: UICollectionViewFlowLayout {
-	weak var delegate: UICollectionViewDelegateFlowDirection?
+view.load(with: viewModel)
 
-	override func prepare() {
-		super.prepare()
-		guard let delegate = delegate else {
-			return
-		}
-
-		self.scrollDirection = delegate.scrollDirection
-	}
-}
-
-class FlowCollectionView: UICollectionView, UICollectionViewDelegateFlowDirection {
-	convenience init(frame: CGRect) {
-		let layout = DirectionableFlowLayout()
-		self.init(frame: frame, collectionViewLayout: layout)
-		layout.delegate = self
-	}
-
-	var scrollDirection: UICollectionViewScrollDirection {
-		return .horizontal
-	}
-}
-
-FlowCollectionView(frame: .zero)
+PlaygroundPage.current.liveView = view
 PlaygroundPage.current.needsIndefiniteExecution = true

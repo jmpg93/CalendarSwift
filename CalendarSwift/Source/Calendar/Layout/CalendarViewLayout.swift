@@ -8,13 +8,28 @@
 
 import UIKit
 
-public protocol CalendarViewLayout {
-	var minimumInteritemSpacing: CGFloat { get }
-	var minimumLineSpacing: CGFloat { get }
-	var scrollDirection: UICollectionViewScrollDirection { get }
+public class CalendarViewLayout: UICollectionViewFlowLayout {
+	public let viewModel: CalendarViewModel
 
-	var monthLayout: MonthViewLayout { get }
+	public init(viewModel: CalendarViewModel) {
+		self.viewModel = viewModel
+		super.init()
+		setUp()
+	}
 
-	func itemSize(at indexPath: IndexPath, in bounds: CGRect, using viewModel: CalendarViewModel) -> CGSize
-	func inset(in bounds: CGRect, using viewModel: CalendarViewModel) -> UIEdgeInsets
+	required public init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+
+	public func setUp() {
+		fatalError("Override this method")
+	}
+
+	public func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
+		fatalError("Override this method")
+	}
+
+	public var numberOfMonths: Int {
+		fatalError("Override this method")
+	}
 }

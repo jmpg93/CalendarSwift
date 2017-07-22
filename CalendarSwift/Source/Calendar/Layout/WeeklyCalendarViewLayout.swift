@@ -8,24 +8,21 @@
 
 import Foundation
 
-public class WeeklyCalendarViewLayout: UICollectionViewFlowLayout {
-	fileprivate let viewModel: CalendarViewModel
-
-	public init(viewModel: CalendarViewModel) {
-		self.viewModel = viewModel
-		super.init()
-		setUp()
-	}
-
-	required public init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-
-	func setUp() {
+public class WeeklyCalendarViewLayout: CalendarViewLayout {
+	public override func setUp() {
 		minimumLineSpacing = 0
-		minimumLineSpacing = 0
-		scrollDirection = .vertical
+		minimumInteritemSpacing = 0
+		scrollDirection = .horizontal
 		sectionInset = .zero
+		estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+	}
+
+	public override var numberOfMonths: Int {
+		return viewModel.numberOfMonths
+	}
+
+	public override func monthViewModel(at indexPath: IndexPath) -> MonthViewModel {
+		return viewModel.monthViewModel(at: indexPath)
 	}
 
 	public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
