@@ -14,6 +14,7 @@
 		181AB9721F194D7700D56BFE /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181AB9711F194D7700D56BFE /* DayView.swift */; };
 		181AB9761F194E1700D56BFE /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181AB9751F194E1700D56BFE /* DayViewModel.swift */; };
 		181AB9791F194E8B00D56BFE /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181AB9781F194E8B00D56BFE /* MonthView.swift */; };
+		182474811F239E8D00622803 /* CGFloat+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182474801F239E8D00622803 /* CGFloat+Utils.swift */; };
 		18A3CCDB1F1A12320060BDC5 /* UICollectionView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A3CCDA1F1A12320060BDC5 /* UICollectionView+Utils.swift */; };
 		18C96F151F1A1D50009F22FD /* EmptyDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C96F141F1A1D50009F22FD /* EmptyDayViewModel.swift */; };
 		18C96F171F1A1D59009F22FD /* DayViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C96F161F1A1D59009F22FD /* DayViewModelProtocol.swift */; };
@@ -26,7 +27,7 @@
 		18CAB5DF1F1EA5940063E33F /* WeeklyCalendarViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAB5DE1F1EA5940063E33F /* WeeklyCalendarViewLayout.swift */; };
 		18CAB5E21F1EABF80063E33F /* FlowDirectionableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAB5E11F1EABF80063E33F /* FlowDirectionableCollectionView.swift */; };
 		18F63DFC1F1FE17D004B186E /* MonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F63DFB1F1FE17D004B186E /* MonthHeaderView.swift */; };
-		18F63DFF1F1FE225004B186E /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F63DFE1F1FE225004B186E /* CalendarHeaderView.swift */; };
+		18F63DFF1F1FE225004B186E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F63DFE1F1FE225004B186E /* HeaderView.swift */; };
 		18F63E011F1FE323004B186E /* UILabel+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F63E001F1FE323004B186E /* UILabel+Utils.swift */; };
 		6C4BDC351F1A73130030B115 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4BDC341F1A73130030B115 /* AppDelegate.swift */; };
 		6C4BDC371F1A73130030B115 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4BDC361F1A73130030B115 /* ViewController.swift */; };
@@ -96,6 +97,7 @@
 		181AB9711F194D7700D56BFE /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		181AB9751F194E1700D56BFE /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
 		181AB9781F194E8B00D56BFE /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		182474801F239E8D00622803 /* CGFloat+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CGFloat+Utils.swift"; path = "Helpers/CGFloat+Utils.swift"; sourceTree = "<group>"; };
 		18A3CCDA1F1A12320060BDC5 /* UICollectionView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UICollectionView+Utils.swift"; path = "Helpers/UICollectionView+Utils.swift"; sourceTree = "<group>"; };
 		18C96F141F1A1D50009F22FD /* EmptyDayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDayViewModel.swift; sourceTree = "<group>"; };
 		18C96F161F1A1D59009F22FD /* DayViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -108,7 +110,7 @@
 		18CAB5DE1F1EA5940063E33F /* WeeklyCalendarViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarViewLayout.swift; sourceTree = "<group>"; };
 		18CAB5E11F1EABF80063E33F /* FlowDirectionableCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowDirectionableCollectionView.swift; sourceTree = "<group>"; };
 		18F63DFB1F1FE17D004B186E /* MonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthHeaderView.swift; sourceTree = "<group>"; };
-		18F63DFE1F1FE225004B186E /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
+		18F63DFE1F1FE225004B186E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		18F63E001F1FE323004B186E /* UILabel+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UILabel+Utils.swift"; path = "Helpers/UILabel+Utils.swift"; sourceTree = "<group>"; };
 		6C4BDC321F1A73130030B115 /* Calendar iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calendar iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C4BDC341F1A73130030B115 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				1810FDD31F1A0E8C007C8EEB /* UINib+Utils.swift */,
 				18A3CCDA1F1A12320060BDC5 /* UICollectionView+Utils.swift */,
 				18F63E001F1FE323004B186E /* UILabel+Utils.swift */,
+				182474801F239E8D00622803 /* CGFloat+Utils.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -290,7 +293,7 @@
 		18F63DFD1F1FE20E004B186E /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				18F63DFE1F1FE225004B186E /* CalendarHeaderView.swift */,
+				18F63DFE1F1FE225004B186E /* HeaderView.swift */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -507,13 +510,14 @@
 				18F63E011F1FE323004B186E /* UILabel+Utils.swift in Sources */,
 				18CAB5D41F1E8B800063E33F /* MonthlyCalendarViewLayout.swift in Sources */,
 				18F63DFC1F1FE17D004B186E /* MonthHeaderView.swift in Sources */,
+				182474811F239E8D00622803 /* CGFloat+Utils.swift in Sources */,
 				1810FDD41F1A0E8C007C8EEB /* UINib+Utils.swift in Sources */,
 				181AB9721F194D7700D56BFE /* DayView.swift in Sources */,
 				18CAB5E21F1EABF80063E33F /* FlowDirectionableCollectionView.swift in Sources */,
 				18C96F151F1A1D50009F22FD /* EmptyDayViewModel.swift in Sources */,
 				18CAB5DD1F1EA4D60063E33F /* WeeklyMonthViewLayout.swift in Sources */,
 				18CAB5D11F1E751B0063E33F /* MonthlyMonthViewLayout.swift in Sources */,
-				18F63DFF1F1FE225004B186E /* CalendarHeaderView.swift in Sources */,
+				18F63DFF1F1FE225004B186E /* HeaderView.swift in Sources */,
 				1810FDD21F1A0E1A007C8EEB /* UIView+Utils.swift in Sources */,
 				181AB9761F194E1700D56BFE /* DayViewModel.swift in Sources */,
 				18A3CCDB1F1A12320060BDC5 /* UICollectionView+Utils.swift in Sources */,

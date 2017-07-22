@@ -23,6 +23,10 @@ public class MonthViewModel {
 		return month.symbol
 	}
 
+	public var shortSymbol: String {
+		return month.shortSymbol
+	}
+
 	public var numberOfWeeks: Int {
 		return month.numberOfWeeks
 	}
@@ -33,6 +37,10 @@ public class MonthViewModel {
 
 	public var numberOfWeekdays: Int {
 		return month.numberOfWeekdays
+	}
+
+	public var firstDayOfTheMonthWeekday: Int {
+		return month.firstDayOfTheMonthDay.weekday
 	}
 
 	public var whiteDaysBeforeFirstDayOfTheMonth: Int {
@@ -51,25 +59,39 @@ public class MonthViewModel {
 		return month.veryShorWeekdaySymbols
 	}
 
-	var outOfTheMonthIndexRangeLeft: Range<Int> {
+	public var isHeaderEnabled: Bool {
+		return mode == .monthly
+	}
+
+	public var headerHeight: CGFloat {
+		return mode == .monthly ? 40.0 : 0.0
+	}
+
+	public var headerSymbols: [String] {
+		var models = [String].init(repeating: " ", count: numberOfWeekdays)
+		models[firstDayOfTheMonthWeekday-1] = shortSymbol
+		return models
+	}
+
+	public var outOfTheMonthIndexRangeLeft: Range<Int> {
 		let lowerBound = Int.min
 		let upperBound = whiteDaysBeforeFirstDayOfTheMonth
 		return lowerBound..<upperBound
 	}
 
-	var inTheMonthIndexRange: Range<Int> {
+	public var inTheMonthIndexRange: Range<Int> {
 		let lowerBound = outOfTheMonthIndexRangeLeft.upperBound
 		let upperBound = lowerBound + numberOfDays
 		return lowerBound..<upperBound
 	}
 
-	var outOfTheMonthIndexRangeRight: Range<Int> {
+	public var outOfTheMonthIndexRangeRight: Range<Int> {
 		let lowerBound = inTheMonthIndexRange.upperBound
 		let upperBound = Int.max
 		return lowerBound..<upperBound
 	}
 
-	lazy var layout: MonthViewLayout = {
+	public lazy var layout: MonthViewLayout = {
 		return self.mode.monthLayout(viewModel: self)
 	}()
 }

@@ -26,10 +26,6 @@ class ViewController: UIViewController {
 
 		view.load(with: viewModel)
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-			let viewModel = CalendarViewModel(year: year, mode: .monthly)
-			view.set(mode: .weekly)
-		})
 		view.constraintToBounds(of: self.view)
 	}
 }

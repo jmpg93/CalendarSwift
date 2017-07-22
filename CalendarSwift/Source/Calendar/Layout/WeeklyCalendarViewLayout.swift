@@ -25,12 +25,25 @@ public class WeeklyCalendarViewLayout: CalendarViewLayout {
 		return viewModel.monthViewModel(at: indexPath)
 	}
 
-	public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-		guard let collectionView = collectionView else {
-			return nil
+	public override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+		guard let collectionView = collectionView else { return nil }
+
+		var attributes = [UICollectionViewLayoutAttributes]()
+
+		for section in 0..<collectionView.numberOfSections {
+			for item in 0..<collectionView.numberOfItems(inSection: section) {
+				let indexPath = IndexPath(item: item, section: section)
+				attributes.append(layoutAttributesForItem(at: indexPath)!)
+			}
 		}
 
-		let attribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+		return attributes
+	}
+
+	public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+		guard let collectionView = collectionView else { return nil }
+		guard let attribute = super.layoutAttributesForItem(at: indexPath) else { return nil }
+
 		attribute.size = itemSize(at: indexPath, in: collectionView.bounds, using: viewModel)
 
 		return attribute
@@ -45,6 +58,6 @@ fileprivate extension WeeklyCalendarViewLayout {
 		let dayWidth = bounds.width / CGFloat(month.numberOfWeekdays)
 		let monthWidth = dayWidth * CGFloat(days)
 
-		return CGSize(width: monthWidth, height: bounds.height)
+		return CGSize(width: monthWidth, height: bounds.height + month.headerHeight)
 	}
 }

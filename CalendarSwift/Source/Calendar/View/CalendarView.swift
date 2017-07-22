@@ -14,7 +14,7 @@ open class CalendarView: UIView {
 	}
 
 	fileprivate var stackView: UIStackView!
-	fileprivate var headerView: CalendarHeaderView!
+	fileprivate var headerView: HeaderView!
 	fileprivate var collectionView: UICollectionView!
 	fileprivate var viewModel: CalendarViewModel!
 
@@ -22,7 +22,7 @@ open class CalendarView: UIView {
 		super.init(frame: frame)
 		collectionView = UICollectionView(frame: frame, collectionViewLayout: UICollectionViewLayout())
 		stackView = UIStackView(frame: frame)
-		headerView = CalendarHeaderView(frame: frame)
+		headerView = HeaderView(frame: frame)
 
 		setUpCollectionView()
 		setUpStackView()
@@ -32,7 +32,7 @@ open class CalendarView: UIView {
 		super.init(coder: aDecoder)
 		collectionView = UICollectionView(coder: aDecoder)!
 		stackView = UIStackView(coder: aDecoder)
-		headerView = CalendarHeaderView(coder: aDecoder)!
+		headerView = HeaderView(coder: aDecoder)!
 
 		setUpCollectionView()
 	}
@@ -86,6 +86,7 @@ fileprivate extension CalendarView {
 		collectionView.showsVerticalScrollIndicator = false
 		collectionView.showsHorizontalScrollIndicator = false
 		collectionView.register(MonthView.self)
+		collectionView.backgroundColor = .white
 	}
 }
 

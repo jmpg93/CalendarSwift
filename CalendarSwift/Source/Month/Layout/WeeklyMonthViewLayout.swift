@@ -20,7 +20,8 @@ public class WeeklyMonthViewLayout: MonthViewLayout {
 		super.prepare()
 		guard let collectionView = collectionView else { return }
 
-		let bounds = collectionView.bounds
+		//TODO: Do not use main screen
+		let bounds = UIScreen.main.bounds //collectionView.bounds
 
 		let itemsPerRow = CGFloat(viewModel.numberOfWeekdays)
 		let width = bounds.width / itemsPerRow
