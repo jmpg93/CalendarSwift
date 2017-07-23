@@ -128,14 +128,29 @@ fileprivate extension MonthlyCalendarViewLayout {
 	}
 
 	func yOffset(to indexPath: IndexPath, in bounds: CGRect, using viewModel: CalendarViewModel) -> CGFloat {
-		var yOffset: CGFloat = 0.0
 
 		for item in 0..<indexPath.item {
 			let indexPath = IndexPath(item: item, section: indexPath.section)
 			let size = itemSize(at: indexPath, in: bounds, using: viewModel)
-			yOffset += size.height
+			yOffset += size.height + sectionOffset(at: indexPath.section, in: bounds, using: viewModel)
 		}
 
 		return yOffset.floored
+	}
+
+	func sectionOffset(at section: Int, in bounds: CGRect, using viewModel: CalendarViewModel) -> CGFloat {
+		guard let collectionView = collectionView else { return 0.0 }
+
+		var sectionOffset: CGFloat = 0.0
+
+		for section in 0..<section {
+			for item in 0..<collectionView.numberOfItems(inSection: section)-1 {
+				let indexPath = IndexPath(item: item, section: section)
+				let size = itemSize(at: indexPath, in: bounds, using: viewModel)
+				sectionOffset += size.height
+			}
+		}
+
+		return sectionOffset
 	}
 }

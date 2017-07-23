@@ -42,7 +42,9 @@ open class CalendarView: UIView {
 
 extension CalendarView {
 	open func insertMonths(indexPaths: [IndexPath]? = nil, sections: IndexSet? = nil) {
+
 		collectionView.performBatchUpdates({
+			self.collectionView.collectionViewLayout.invalidateLayout()
 			if let sections = sections {
 				self.collectionView.insertSections(sections)
 			}
@@ -51,7 +53,6 @@ extension CalendarView {
 				self.collectionView.insertItems(at: indexPaths)
 			}
 
-			self.collectionView.collectionViewLayout.invalidateLayout()
 		}, completion: nil)
 	}
 

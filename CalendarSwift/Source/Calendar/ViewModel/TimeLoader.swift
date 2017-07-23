@@ -20,7 +20,6 @@ public class TimeLoader {
 	fileprivate var isUpdating = false
 
 	func scrollViewDidScroll(scrollView: UIScrollView, currentYears: [Year]) -> Result {
-		defer { isUpdating = false }
 
 		let contentOffsetFromBottom = scrollView.contentOffset.y + scrollView.bounds.size.height
 		let scrollToEndDelta = scrollView.contentSize.height - contentOffsetFromBottom
@@ -47,14 +46,14 @@ public class TimeLoader {
 		let years = currentYears + newYears
 		var indexPaths: [IndexPath] = []
 		
-		for section in years.indices where section > currentYears.indices.upperBound {
+		for section in years.indices where section >= currentYears.indices.upperBound {
 			for item in years[section].months.indices {
 				indexPaths += [IndexPath(item: item, section: section)]
 			}
 		}
 
-		let sections = IndexSet(integersIn: currentYears.indices.upperBound..<years.indices.upperBound)
-
+		//let sections = IndexSet(integersIn: currentYears.indices.upperBound..<years.indices.upperBound)
+		let sections = IndexSet(integer: 1)
 		return .inserted(years: newYears, indexPaths: indexPaths, sections: sections)
 	}
 }
