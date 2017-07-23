@@ -8,6 +8,10 @@
 
 import Foundation
 
+public protocol CalendarViewDelegate: class {
+	func calendarView(_ calendarView: CalendarView, didMoveFrom oldYear: Int, to newYear: Int)
+}
+
 open class CalendarView: UIView {
 	fileprivate enum Constants {
 		static var headerHeight: CGFloat = 44
@@ -17,6 +21,8 @@ open class CalendarView: UIView {
 	fileprivate var headerView: HeaderView!
 	fileprivate var collectionView: UICollectionView!
 	fileprivate var viewModel: CalendarViewModel!
+
+	open weak var delegate: CalendarViewDelegate?
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -117,7 +123,7 @@ extension CalendarView: UICollectionViewDataSource {
 		return viewModel.numberOfMonths(in: section)
 	}
 
-	public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+	open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeue(cell: MonthView.self, at: indexPath)
 
 		let monthViewModel = viewModel.monthViewModel(at: indexPath)
@@ -126,7 +132,7 @@ extension CalendarView: UICollectionViewDataSource {
 		return cell
 	}
 
-	public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+	open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 		let view = collectionView.dequeue(cell: MonthView.self, at: indexPath)
 		view.backgroundColor = .red
 		return view
@@ -141,8 +147,14 @@ extension CalendarView: UICollectionViewDelegate {
 
 // MARK: UIScrollViewDelegate methods
 
-extension CalendarView {
-	public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+public extension CalendarView {
+	open func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		viewModel.scrollViewDidScroll(scrollView)
+	}
+}
+
+extension CalendarView: CalendarViewDelegate {
+	open func calendarView(_ calendarView: CalendarView, didMoveFrom oldYear: Int, to newYear: Int) {
+		delegate?.calendarView(calendarView, didMoveFrom: oldYear, to: newYear)
 	}
 }

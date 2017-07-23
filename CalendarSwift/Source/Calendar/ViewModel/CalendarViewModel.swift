@@ -86,5 +86,7 @@ extension CalendarViewModel: TimeLoaderDelegate {
 	}
 
 	func timeLoadedDidMove(from oldYear: Year, to newYear: Year) {
+		guard let view = view else { return }
+		view.calendarView(view, didMoveFrom: oldYear.year, to: newYear.year)
 	}
 }

@@ -23,7 +23,8 @@ class TimeLoader {
 	fileprivate var currentYear: Year?
 	fileprivate var isCreatingTime = false
 	fileprivate var isVerifiyingTime = false
-	fileprivate let queue = DispatchQueue(label: "self.jmpg93.timeLoader")
+	fileprivate let creationQueue = DispatchQueue(label: "self.jmpg93.timeLoader.creation")
+	fileprivate let verificationQueue = DispatchQueue(label: "self.jmpg93.timeLoader.verification")
 
 	func scrollViewDidScroll(scrollView: UIScrollView, currentYears: [Year]) {
 		verifyYearChange(scrollView: scrollView, currentYears: currentYears)
@@ -51,17 +52,28 @@ extension TimeLoader {
 
 		isVerifiyingTime = true
 
-		queue.async {
-			for month in months {
-				if month.year().year != self.currentYear!.year {
-					DispatchQueue.main.async {
-						self.currentYear = month.year()
-						self.delegate?.timeLoadedDidMove(from: self.currentYear!, to: month.year())
-					}
-				}
+		verificationQueue.async {
+			let yearsByYear = months
+				.map({ $0.year() })
+				.reduce([Year: Int](), { (dic, currentYear) -> [Year: Int] in
+					var dic = dic
+					let count = dic[currentYear] ?? 1
+					dic[currentYear] = count + 1
+					return dic
+				})
+
+			guard let mostRepeatedYear = yearsByYear.sorted(by: { $0.value > $1.value }).first?.key else {
+				self.isVerifiyingTime = false
+				return
 			}
 
-			self.isVerifiyingTime = false
+			DispatchQueue.main.async {
+				if mostRepeatedYear != self.currentYear! {
+					self.delegate?.timeLoadedDidMove(from: self.currentYear!, to: mostRepeatedYear)
+					self.currentYear = mostRepeatedYear
+				}
+				self.isVerifiyingTime = false
+			}
 		}
 	}
 
@@ -87,7 +99,7 @@ extension TimeLoader {
 
 		isCreatingTime = true
 		
-		queue.async {
+		creationQueue.async {
 			let createdYears = [lastContainedYear.next]
 			let years = currentYears + createdYears
 			var indexPaths: [IndexPath] = []
