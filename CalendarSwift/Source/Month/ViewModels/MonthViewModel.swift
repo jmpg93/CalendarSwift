@@ -99,6 +99,10 @@ public class MonthViewModel {
 // MARK: Datasource methods
 
 extension MonthViewModel {
+	public func year() -> Year {
+		return month.year
+	}
+
 	public func day(at indexPath: IndexPath) -> Day {
 		return month.days[indexPath.item]
 	}

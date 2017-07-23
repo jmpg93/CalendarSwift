@@ -73,6 +73,10 @@ extension CalendarView {
 	
 		collectionView.reloadData()
 	}
+
+	open var indexPathsForVisibleItems: [IndexPath] {
+		return collectionView.indexPathsForVisibleItems
+	}
 }
 
 // MARK: Private methods

@@ -13,12 +13,14 @@ public class CalendarViewModel  {
 	weak var view: CalendarView?
 	fileprivate var years: [Year] = []
 	fileprivate var mode: Mode
-
-	fileprivate let timeLoader = TimeLoader()
+	fileprivate let timeLoader: TimeLoader
 	
 	public init(years: [Year], mode: Mode) {
 		self.years = years
 		self.mode = mode
+
+		timeLoader = TimeLoader()
+		timeLoader.delegate = self
 	}
 
 	public convenience init(year: Year, mode: Mode) {
@@ -67,13 +69,22 @@ public extension CalendarViewModel {
 
 public extension CalendarViewModel {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		let loaderResult = timeLoader.scrollViewDidScroll(scrollView: scrollView, currentYears: years)
-		switch loaderResult {
-		case .none:
-			return
-		case .inserted(let newYears, let insertIndexPaths, let sections):
-			self.years += newYears
-			self.view?.insertMonths(indexPaths: insertIndexPaths, sections: sections)
-		}
+		timeLoader.scrollViewDidScroll(scrollView: scrollView, currentYears: years)
+	}
+}
+
+// MARK: TimeLoaderDelegate methods
+
+extension CalendarViewModel: TimeLoaderDelegate {
+	var visibleMonths: [MonthViewModel] {
+		return view?.indexPathsForVisibleItems.map(monthViewModel) ?? []
+	}
+
+	func timeLoaderDidCreateTime(currentYears: [Year], createdYears: [Year], newIndexPaths: [IndexPath], newSections: IndexSet) {
+		self.years += createdYears
+		self.view?.insertMonths(indexPaths: newIndexPaths, sections: newSections)
+	}
+
+	func timeLoadedDidMove(from oldYear: Year, to newYear: Year) {
 	}
 }

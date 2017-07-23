@@ -10,50 +10,100 @@ import Foundation
 import UIKit
 import TimeSwift
 
-public class TimeLoader {
-	public enum Result {
-		case inserted(years: [Year], indexPaths: [IndexPath], sections: IndexSet)
-		case none
+protocol TimeLoaderDelegate: class {
+	var visibleMonths: [MonthViewModel] { get }
+	func timeLoaderDidCreateTime(currentYears: [Year], createdYears: [Year], newIndexPaths: [IndexPath], newSections: IndexSet)
+	func timeLoadedDidMove(from oldYear: Year, to newYear: Year)
+}
+
+class TimeLoader {
+	weak var delegate: TimeLoaderDelegate?
+
+	fileprivate let maximunDeltaToEnd: CGFloat = 2000.0
+	fileprivate var currentYear: Year?
+	fileprivate var isCreatingTime = false
+	fileprivate var isVerifiyingTime = false
+	fileprivate let queue = DispatchQueue(label: "self.jmpg93.timeLoader")
+
+	func scrollViewDidScroll(scrollView: UIScrollView, currentYears: [Year]) {
+		verifyYearChange(scrollView: scrollView, currentYears: currentYears)
+		createTimeIfNeeded(scrollView: scrollView, currentYears: currentYears)
+	}
+}
+
+extension TimeLoader {
+	func verifyYearChange(scrollView: UIScrollView, currentYears: [Year]) {
+		guard isVerifiyingTime == false else {
+			return
+		}
+
+		guard let months = delegate?.visibleMonths else {
+			return
+		}
+
+		guard !months.isEmpty else {
+			return
+		}
+
+		if currentYear == nil {
+			currentYear = months.first!.year()
+		}
+
+		isVerifiyingTime = true
+
+		queue.async {
+			for month in months {
+				if month.year().year != self.currentYear!.year {
+					DispatchQueue.main.async {
+						self.currentYear = month.year()
+						self.delegate?.timeLoadedDidMove(from: self.currentYear!, to: month.year())
+					}
+				}
+			}
+
+			self.isVerifiyingTime = false
+		}
 	}
 
-	fileprivate let maximunDeltaToEnd: CGFloat = 1000.0
-	fileprivate var isUpdating = false
-
-	func scrollViewDidScroll(scrollView: UIScrollView, currentYears: [Year]) -> Result {
-
+	func createTimeIfNeeded(scrollView: UIScrollView, currentYears: [Year]) {
 		let contentOffsetFromBottom = scrollView.contentOffset.y + scrollView.bounds.size.height
 		let scrollToEndDelta = scrollView.contentSize.height - contentOffsetFromBottom
 
-		guard isUpdating == false else {
-			return .none
+		guard isCreatingTime == false else {
+			return
 		}
 
 		guard scrollToEndDelta <= maximunDeltaToEnd else {
-			return .none
+			return
 		}
 
 		guard let lastContainedYear = currentYears.last else {
-			return .none
+			return
 		}
 
 		guard !currentYears.contains(lastContainedYear.next) else {
-			return .none
+			return
 		}
 
-		isUpdating = true
-
-		let newYears = [lastContainedYear]
-		let years = currentYears + newYears
-		var indexPaths: [IndexPath] = []
+		isCreatingTime = true
 		
-		for section in years.indices where section >= currentYears.indices.upperBound {
-			for item in years[section].months.indices {
-				indexPaths += [IndexPath(item: item, section: section)]
+		queue.async {
+			let createdYears = [lastContainedYear.next]
+			let years = currentYears + createdYears
+			var indexPaths: [IndexPath] = []
+
+			for section in years.indices where section >= currentYears.indices.upperBound {
+				for item in years[section].months.indices {
+					indexPaths += [IndexPath(item: item, section: section)]
+				}
+			}
+
+			let sections = IndexSet(integersIn: currentYears.indices.upperBound..<years.indices.upperBound)
+
+			DispatchQueue.main.async {
+				self.delegate?.timeLoaderDidCreateTime(currentYears: currentYears, createdYears: createdYears, newIndexPaths: indexPaths, newSections: sections)
+				self.isCreatingTime = false
 			}
 		}
-
-		//let sections = IndexSet(integersIn: currentYears.indices.upperBound..<years.indices.upperBound)
-		let sections = IndexSet(integer: 1)
-		return .inserted(years: newYears, indexPaths: indexPaths, sections: sections)
 	}
 }
