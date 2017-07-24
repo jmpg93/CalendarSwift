@@ -19,6 +19,14 @@ public class MonthViewModel {
 		self.mode = mode
 	}
 
+	public lazy var days: [Day] = {
+		return self.month.days
+	}()
+
+	public lazy var year: Year = {
+		return self.month.year
+	}()
+	
 	public lazy var symbol: String = {
 		return self.month.symbol
 	}()
@@ -99,12 +107,8 @@ public class MonthViewModel {
 // MARK: Datasource methods
 
 extension MonthViewModel {
-	public func year() -> Year {
-		return month.year
-	}
-
 	public func day(at indexPath: IndexPath) -> Day {
-		return month.days[indexPath.item]
+		return days[indexPath.item]
 	}
 
 	public func dayViewModel(at indexPath: IndexPath) -> DayViewModelProtocol {

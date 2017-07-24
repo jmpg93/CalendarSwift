@@ -47,14 +47,14 @@ extension TimeLoader {
 		}
 
 		if currentYear == nil {
-			currentYear = months.first!.year()
+			currentYear = months.first!.year
 		}
 
 		isVerifiyingTime = true
 
 		verificationQueue.async {
 			let yearsByYear = months
-				.map({ $0.year() })
+				.map({ $0.year })
 				.reduce([Year: Int](), { (dic, currentYear) -> [Year: Int] in
 					var dic = dic
 					let count = dic[currentYear] ?? 1
@@ -101,7 +101,7 @@ extension TimeLoader {
 		
 		creationQueue.async {
 			let createdYears = [lastContainedYear.next]
-			let years = currentYears + createdYears
+			var years = currentYears + createdYears
 			var indexPaths: [IndexPath] = []
 
 			for section in years.indices where section >= currentYears.indices.upperBound {

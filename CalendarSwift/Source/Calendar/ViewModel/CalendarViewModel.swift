@@ -27,24 +27,16 @@ public class CalendarViewModel  {
 		self.init(years: [year], mode: mode)
 	}
 
-	fileprivate var months: [Month] {
-		return years.flatMap({ $0.months })
-	}
-
 	public var weekdaySymbols: [String] {
-		return months.first?.weekdaySymbols ?? []
+		return years.first?.weekDaySymbols ?? []
 	}
 
 	public var veryShortWeekdaySymbols: [String] {
-		return months.first?.veryShorWeekdaySymbols ?? []
+		return years.first?.veryShortWeekdaySymbols ?? []
 	}
 
 	public var layout: UICollectionViewLayout {
 		return mode.calendarLayout(viewModel: self)
-	}
-
-	public func set(mode: Mode) {
-		self.mode = mode
 	}
 }
 
@@ -88,5 +80,13 @@ extension CalendarViewModel: TimeLoaderDelegate {
 	func timeLoadedDidMove(from oldYear: Year, to newYear: Year) {
 		guard let view = view else { return }
 		view.calendarView(view, didMoveFrom: oldYear.year, to: newYear.year)
+	}
+}
+
+// MARK: Internal methods
+
+extension CalendarViewModel {
+	func set(mode: Mode) {
+		self.mode = mode
 	}
 }
